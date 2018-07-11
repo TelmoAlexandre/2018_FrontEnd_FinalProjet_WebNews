@@ -1,0 +1,559 @@
+@charset "UTF-8";
+body {
+  background-color: #ebeae7;
+  background-image: url("https://i.imgur.com/W9YCify.png");
+  padding: 0rem;
+  margin: 0rem;
+  font-size: 1rem;
+  font-family: "Fondamento", cursive;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
+}
+
+.cursive {
+  font-family: "Fondamento", cursive;
+}
+
+.headerContainer .headerLinks {
+  font-size: 1.2em;
+  margin-top: .5rem;
+}
+
+.headerContainer .headerLinks .categoryLink {
+  padding: 0 0 0 1rem;
+  font-weight: bold;
+}
+
+.headerContainer .headerLinks .categoryLink:hover {
+  text-decoration: underline;
+}
+
+.headerContainer .loginRegister {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 1.25rem;
+  margin-top: .5rem;
+  font-family: "Fondamento", cursive;
+}
+
+.headerContainer .loginRegister .login {
+  display: inline;
+}
+
+.headerContainer .loginRegister .login div {
+  position: relative;
+  display: inline;
+  font-size: 1.2em;
+  margin-left: .8rem;
+}
+
+.headerContainer .loginRegister .login div a:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: .1rem;
+  background-color: black;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+.headerContainer .loginRegister .login div a:hover:after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+}
+
+.headerContainer .title {
+  font-size: 4.5em;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: .6rem;
+  border-bottom: .6rem double black;
+  font-family: "Fondamento", cursive;
+}
+
+.headerContainer .title a:hover {
+  padding-left: 1.25rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.headerContainer .date {
+  font: 1em "Roboto Mono", monospace;
+  text-align: center;
+  width: 17.5rem;
+  margin: auto;
+  margin-top: .6rem;
+  border-left: .06rem solid black;
+  border-right: .06rem solid black;
+}
+
+.bodyContainer {
+  margin-top: .6rem;
+  border-top: .19rem solid black;
+  text-align: center;
+}
+
+.bodyContainer .newsTitle {
+  font-size: 2.5em;
+  font-weight: bold;
+  padding: 0rem 1rem;
+  font-family: "Fondamento", cursive;
+}
+
+.bodyContainer .newsDescription {
+  padding: 0rem .6rem;
+  margin-top: 1.25rem;
+}
+
+.footer {
+  font-family: "Fondamento", cursive;
+}
+
+.newsBlock {
+  width: 20%;
+  max-height: 30%;
+  margin-top: 2rem;
+  font-family: "Fondamento", cursive;
+}
+
+.newsBlock h1:hover {
+  padding-left: 1.5rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.newsBlock .newsOptions {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.newsBlock .newsOptions .newsOptionLink {
+  cursor: pointer;
+  padding: 0 .5rem;
+}
+
+.newsBlock .newsOptions .newsOptionLink:hover {
+  text-decoration: underline;
+}
+
+.newsCategory {
+  padding: 2rem 0 0;
+}
+
+.searchOption input {
+  font-weight: bold;
+}
+
+.searchOption input:hover {
+  text-decoration: underline;
+}
+
+.searchOption .searchInput {
+  padding-left: 7.5rem;
+}
+
+.searchOption .searchInputManager {
+  padding-left: 1rem;
+}
+
+.searchOption .search-box {
+  -webkit-transition: width 1s, border-radius 1s, background 1s, -webkit-box-shadow 1s;
+  transition: width 1s, border-radius 1s, background 1s, -webkit-box-shadow 1s;
+  transition: width 1s, border-radius 1s, background 1s, box-shadow 1s;
+  transition: width 1s, border-radius 1s, background 1s, box-shadow 1s, -webkit-box-shadow 1s;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background-color: #ebeae7;
+  background-image: url("https://i.imgur.com/W9YCify.png");
+  color: black;
+}
+
+.searchOption .search-box + label .search-icon {
+  color: black;
+}
+
+.searchOption .search-box:hover {
+  color: white;
+}
+
+.searchOption .search-box:focus {
+  -webkit-transition: width 1s cubic-bezier(0, 1.22, 0.66, 1.39), border-radius 1s, background 1s;
+  transition: width 1s cubic-bezier(0, 1.22, 0.66, 1.39), border-radius 1s, background 1s;
+  border: none;
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding-left: 15px;
+  cursor: text;
+  width: 300px;
+  border-radius: auto;
+  background: #d2d2d2;
+  background-image: url("https://i.imgur.com/W9YCify.png");
+  color: black;
+}
+
+.searchOption .search-box:focus + label .search-icon {
+  display: none;
+}
+
+.searchOption .search-box:not(:focus) {
+  text-indent: -5000px;
+}
+
+#search-submit {
+  position: relative;
+  left: -5000px;
+}
+
+.search-icon {
+  position: relative;
+  left: -51px;
+  top: 11px;
+  color: white;
+  cursor: pointer;
+}
+
+.noFoundNews {
+  padding: 6rem 0 0;
+}
+
+.newsDetail {
+  margin-top: 1rem;
+  font-family: "Fondamento", cursive;
+}
+
+.newsDetail .newsDetailHeaderContainer {
+  margin: .4rem auto;
+  width: 100%;
+}
+
+.newsDetail .newsDetailHeaderContainer .newsDetailHeaderTitleContainer .newsTitle {
+  font-size: 3em;
+}
+
+.newsDetail .newsDetailHeaderContainer .newsDetailHeaderTitleContainer .newsDescription {
+  margin-top: 2rem;
+  text-align: justify;
+  font-weight: bold;
+}
+
+.newsDetail .newsDetailHeaderContainer .newsDetailHeaderCategoryContainer {
+  font-size: 1.5em;
+}
+
+.newsDetail .newsDetailHeaderContainer .newsDetailHeaderCategoryContainer a:hover {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.newsDetail .newsDetailHeaderContainer .newsDetailHeaderImagesContainer img {
+  height: 100%;
+}
+
+.newsDetail .newsInfo {
+  padding: 1rem 0 0;
+  font-size: 1.2em;
+}
+
+.newsDetail .newsInfo p {
+  margin: 0;
+}
+
+.newsDetail .newsInfo .newsAuthors {
+  text-align: left;
+}
+
+.newsDetail .newsInfo .newsAuthors a:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.newsDetail .newsInfo .newsAuthors .addAuthor {
+  padding-top: 1rem;
+  font-weight: bold;
+}
+
+.newsDetail .newsInfo .newsAuthors .addAuthor a:hover {
+  text-decoration: underline;
+  padding-left: .4rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.newsDetail .newsInfo .newsDate {
+  text-align: right;
+}
+
+.newsDetail .newsInfo .newsDate .newsOptions {
+  margin-top: 2rem;
+}
+
+.newsDetail .newsInfo .newsDate .newsOptions a:hover {
+  text-decoration: underline;
+}
+
+.newsDetail .newsInfo .newsDate .time {
+  font-size: .8em;
+}
+
+.newsDetail .newsDetailBodyContainer {
+  text-align: justify;
+  margin: .4rem auto;
+  font-size: 1.1em;
+  width: 100%;
+  padding: .5rem 2rem;
+}
+
+.newsDetail .newsDetailBodyContainer p {
+  padding: 0;
+  margin: 0 0 1.5rem;
+  font-weight: bold;
+}
+
+.newsCommentsContainer {
+  border-top: .6rem double;
+  margin-top: 4rem;
+  text-align: left;
+}
+
+.newsCommentsContainer > p {
+  padding: 2rem 0 1rem;
+  font-size: 1.5em;
+}
+
+.newsCommentsContainer > p a:hover {
+  text-decoration: underline;
+  padding: 0 0 0 .3rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.newsCommentsContainer .commentNew {
+  padding: 2rem 0;
+}
+
+.newsCommentsContainer .commentNew .commentContent {
+  width: 60%;
+  height: 5rem;
+  background-color: #ededed;
+}
+
+.newsCommentsContainer .commentNew .commentSubmit input {
+  padding-left: 0;
+  font-weight: bold;
+}
+
+.newsCommentsContainer .commentNew .commentSubmit input:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.newsCommentsContainer .commentsList h2 {
+  margin: 1.5rem 0 2rem;
+  font-family: "Fondamento", cursive;
+  font-weight: bold;
+}
+
+.newsCommentsContainer .commentsList div::first-of-type {
+  border-top: none;
+}
+
+.newsCommentsContainer .commentsList .comment {
+  padding: 2rem .5rem 2rem;
+  border-top: .06rem solid;
+}
+
+.newsCommentsContainer .commentsList .comment p {
+  margin: 0;
+}
+
+.newsCommentsContainer .commentsList .comment .commentHeaderContainer .commentHeaderUser {
+  font-weight: bold;
+}
+
+.newsCommentsContainer .commentsList .comment .commentHeaderContainer .commentHeaderUser a:hover {
+  text-decoration: underline;
+}
+
+.newsCommentsContainer .commentsList .comment .commentHeaderContainer .commentHeaderDate {
+  font-size: .8em;
+}
+
+.newsCommentsContainer .commentsList .comment .commentBodyContainer {
+  margin-top: 1rem;
+}
+
+.newsCommentsContainer .commentsList .commentDeleteOption {
+  text-align: right;
+  font-size: 1.2em;
+}
+
+.newsCommentsContainer .commentsList .commentDeleteOption a:hover {
+  text-decoration: underline;
+}
+
+img {
+  width: 100%;
+}
+
+.footer {
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 1rem;
+  padding: .3rem 0rem;
+  border-top: 0.19rem double black;
+  border-bottom: 0.19rem double black;
+}
+
+.dropdown {
+  width: 100px;
+  margin-left: 1rem;
+}
+
+.dropdownOptions {
+  text-align: left;
+}
+
+.nav-container {
+  background-color: #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(153, 153, 153, 0.35);
+          box-shadow: 0 1px 2px 0 rgba(153, 153, 153, 0.35);
+  padding: 1em;
+  border: 1px solid #eee;
+  display: block;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.nav-item {
+  padding: 1em;
+  display: inline;
+}
+
+.nav-item-dropdown {
+  position: relative;
+}
+
+.nav-item-dropdown:hover > .dropdown-menu {
+  display: block;
+  opacity: 1;
+}
+
+.dropdown-trigger {
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown-trigger:focus + .dropdown-menu {
+  display: block;
+  opacity: 1;
+}
+
+.dropdown-trigger::after {
+  content: "›";
+  position: absolute;
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  top: -5px;
+  right: -15px;
+}
+
+.dropdown-menu {
+  background-color: #ebeae7;
+  background-image: url("https://i.imgur.com/W9YCify.png");
+  display: inline-block;
+  text-align: right;
+  position: absolute;
+  top: 2.5rem;
+  right: -10px;
+  display: none;
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+  min-width: 80px;
+  list-style: none;
+  -webkit-padding-start: 0;
+  padding: 0;
+}
+
+.dropdown-menu a {
+  color: #000;
+}
+
+.dropdown-menu-item {
+  cursor: pointer;
+  padding: .5rem;
+  text-align: center;
+  list-style: none;
+  -webkit-padding-start: 0;
+}
+
+.dropdown-menu-item:hover {
+  background-color: #c8c5bd;
+}
+
+.dropdown-menuOptions {
+  width: 160px;
+}
+
+.dropdown-menuOptions .dropdown-menu-item {
+  text-align: left;
+  padding-left: .5rem;
+}
+
+.glyphicon-search:before {
+  content: "\e003";
+}
+
+.glyphicon {
+  position: relative;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  font-size: 2rem;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url("../fonts/glyphicons-halflings-regular.eot");
+  src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular") format("svg");
+}
+/*# sourceMappingURL=WebPaper.css.map */

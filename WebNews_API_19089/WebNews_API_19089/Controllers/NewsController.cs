@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebNews_API_19089.Models;
-using WebNews_API_19089.Models.ViewModels;
 
 namespace WebNews_API_19089.Controllers
 {
@@ -22,28 +21,27 @@ namespace WebNews_API_19089.Controllers
 
         #region NewsList
 
-        [ResponseType(typeof(GetNewsViewModel))]
+        
         public IHttpActionResult GetNews()
         {
 
             // Utilizo um ViewModel para receber apenas os dados mostrados na página inicial
-            var news = db.News.Select(n => new NewsFrontPageViewModel
+            var news = db.News.Select(n => new
             {
-                ID = n.ID,
-                Title = n.Title,
-                Description = n.Description
+                n.ID,
+                n.Title,
+                n.Description
             }).ToList();
 
             // Retorno outro view model que contem um ICollection<NewsFrontPageViewModel>
             // e uma string com a categoria
-            return Ok(new GetNewsViewModel
+            return Ok(new
             {
                 News = news,
                 Category = "All"
             });
         }
 
-        [ResponseType(typeof(GetNewsViewModel))]
         [HttpGet, Route("category/{categoryID}")]
         public IHttpActionResult GetNews(int categoryID)
         {
@@ -66,8 +64,8 @@ namespace WebNews_API_19089.Controllers
 
             return Ok(new
             {
-                news,
-                category = category.Name
+                News = news,
+                Category = category.Name
             });
         }
 
@@ -115,9 +113,9 @@ namespace WebNews_API_19089.Controllers
                 newsArticle.Description,
                 newsArticle.Content,
                 newsArticle.Category.Name,
-                users,
-                comments,
-                photos
+                Users = users,
+                Comments = comments,
+                Photos = photos
             }
             );
 

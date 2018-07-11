@@ -1,0 +1,414 @@
+$tl: 1s;
+  
+body
+  background-color: rgb(235, 234, 231)
+  background-image: url("https://i.imgur.com/W9YCify.png")
+  padding: 0rem
+  margin: 0rem
+  font-size: 1rem
+  font-family: "Fondamento", cursive
+
+a
+  text-decoration: none
+  color: black
+  &:hover
+    text-decoration: none
+    color: black
+
+.bold
+  font-weight: bold
+
+.center
+  text-align: center
+
+.cursive
+  font-family: "Fondamento", cursive
+
+.headerContainer
+  .headerLinks
+    font-size: 1.2em
+    margin-top: .5rem
+    .categoryLink
+      padding: 0 0 0 1rem
+      font-weight: bold
+      &:hover
+        text-decoration: underline
+  .loginRegister
+    position: absolute
+    top: 0
+    right: 0
+    margin-right: 1.25rem
+    margin-top: .5rem
+    font-family: "Fondamento", cursive
+    .login
+      display: inline
+      div
+        position: relative
+        display: inline
+        font-size: 1.2em
+        margin-left: .8rem
+        a
+          &:after
+            content: ''
+            position: absolute
+            bottom: 0
+            right: 0
+            left: 0
+            width: 100%
+            height: .1rem
+            background-color: black
+            transform: scaleX(0)
+            transition: transform 0.3s
+          &:hover
+            &:after
+              transform: scaleX(1)
+  .title
+    font-size: 4.5em
+    font-weight: bold
+    text-align: center
+    padding-bottom: .6rem
+    border-bottom: .6rem double black
+    font-family: "Fondamento", cursive
+    a:hover
+        padding-left: 1.25rem
+        transition: 0.5s
+  .date
+    font: 1em "Roboto Mono", monospace
+    text-align: center
+    width: 17.5rem
+    margin: auto
+    margin-top: .6rem
+    border-left: .06rem solid black
+    border-right: .06rem solid black
+
+.bodyContainer
+  margin-top: .6rem
+  border-top: .19rem solid black
+  text-align: center
+  .newsTitle
+    font-size: 2.5em
+    font-weight: bold
+    padding: 0rem 1rem
+    font-family: "Fondamento", cursive
+  .newsDescription
+    padding: 0rem .6rem
+    margin-top: 1.25rem
+
+.footer
+  font-family: "Fondamento", cursive
+
+// News/Index
+.newsBlock
+  width: 20%
+  max-height: 30%
+  margin-top: 2rem
+  font-family: "Fondamento", cursive
+  h1:hover
+    padding-left: 1.5rem
+    transition: 0.5s
+  .newsOptions
+    font-size: 1.5em
+    font-weight: bold
+    .newsOptionLink
+      cursor: pointer
+      padding: 0 .5rem
+      &:hover
+        text-decoration: underline
+    
+.newsCategory
+  padding: 2rem 0 0
+
+
+.searchOption
+  input
+    font-weight: bold
+    &:hover
+      text-decoration: underline
+  .searchInput
+    padding-left: 7.5rem
+  .searchInputManager
+    padding-left: 1rem
+  .search-box
+    transition: width $tl, border-radius $tl, background $tl, box-shadow $tl
+    width: 60px
+    height: 60px
+    border-radius: 30px
+    border: none
+    cursor: pointer
+    background-color: rgb(235, 234, 231)
+    background-image: url("https://i.imgur.com/W9YCify.png")
+    color: black
+    & + label .search-icon  
+      color: black    
+    &:hover
+      color: white
+    &:focus
+      transition: width $tl cubic-bezier(0,1.22,.66,1.39), border-radius $tl, background $tl
+      border: none
+      outline: none
+      box-shadow: none
+      padding-left: 15px
+      cursor: text
+      width: 300px
+      border-radius: auto
+      background: rgb(210, 210, 210)
+      background-image: url("https://i.imgur.com/W9YCify.png")
+      color: black
+      & + label .search-icon    
+        display: none
+    &:not(:focus)     
+      text-indent: -5000px  
+
+#search-submit 
+  position: relative
+  left: -5000px
+
+.search-icon
+  position: relative
+  left: -51px
+  top: 11px
+  color: white
+  cursor: pointer
+
+.noFoundNews
+  padding: 6rem 0 0
+
+// News/Details/{id}
+.newsDetail
+  margin-top: 1rem
+  font-family: "Fondamento", cursive
+  // News (header)
+  .newsDetailHeaderContainer
+    margin: .4rem auto
+    width: 100%
+    .newsDetailHeaderTitleContainer
+      .newsTitle
+        font-size: 3em
+      .newsDescription
+        margin-top: 2rem
+        text-align: justify
+        font-weight: bold
+    .newsDetailHeaderCategoryContainer
+      font-size: 1.5em
+      a
+        &:hover
+          font-weight: bold
+          text-decoration: underline
+    .newsDetailHeaderImagesContainer
+      img
+        height: 100%
+  .newsInfo
+    padding: 1rem 0 0
+    font-size: 1.2em
+    p
+      margin: 0
+    .newsAuthors
+      text-align: left
+      a
+        &:hover
+          text-decoration: underline
+          font-weight: bold
+      .addAuthor
+        padding-top: 1rem
+        font-weight: bold
+        a
+          &:hover
+            text-decoration: underline
+            padding-left: .4rem
+            transition: .5s
+    .newsDate
+      text-align: right
+      .newsOptions
+        margin-top: 2rem
+        a
+          &:hover
+            text-decoration: underline
+      .time
+        font-size: .8em
+
+  // News (body)
+  .newsDetailBodyContainer
+    text-align: justify
+    margin: .4rem auto
+    font-size: 1.1em
+    width: 100%
+    padding: .5rem 2rem
+    p
+      padding: 0
+      margin: 0 0 1.5rem
+      font-weight: bold
+  
+//Comments
+.newsCommentsContainer
+  border-top: .6rem double
+  margin-top: 4rem
+  text-align: left
+  &>p
+    padding: 2rem 0 1rem
+    font-size: 1.5em
+    a
+      &:hover
+        text-decoration: underline
+        padding: 0 0 0 .3rem
+        transition: .5s
+  .commentNew
+    padding: 2rem 0
+    .commentContent
+        width: 60%
+        height: 5rem
+        background-color: rgb(237, 237, 237)
+    .commentSubmit
+      input
+        padding-left: 0
+        font-weight: bold
+        &:hover
+          padding-left: .5rem
+          transition: .5s
+  .commentsList
+    h2
+      margin: 1.5rem 0 2rem
+      font-family: "Fondamento", cursive
+      font-weight: bold
+    div::first-of-type
+      border-top: none
+    .comment
+      padding: 2rem .5rem 2rem
+      border-top: .06rem solid
+      p
+        margin: 0
+      .commentHeaderContainer
+        .commentHeaderUser
+          font-weight: bold
+          a
+            &:hover
+              text-decoration: underline
+        .commentHeaderDate
+          font-size: .8em
+      
+      .commentBodyContainer
+        margin-top: 1rem
+    .commentDeleteOption
+      text-align: right
+      font-size: 1.2em
+      a
+        &:hover
+          text-decoration: underline
+  
+img
+  width: 100%
+
+.footer
+  text-align: center
+  font-size: 1em
+  font-weight: bold
+  margin-top: 1rem
+  padding: .3rem 0rem
+  border-top: 0.19rem double black
+  border-bottom: 0.19rem double black
+
+// Dropdown menu no _layout -----------------------------------------------------------------------------
+
+.dropdown
+  width: 100px
+  margin-left: 1rem
+
+.dropdownOptions
+  text-align: left
+
+.nav-container
+  background-color: #fff
+  border-radius: 4px
+  box-shadow: 0 1px 2px 0 rgba(153,153,153,0.35)
+  padding: 1em
+  border: 1px solid #eee
+  display: block
+  max-width: 400px
+  margin: 0 auto
+  text-align: center
+
+//Navigation menu
+.nav-item 
+  padding: 1em
+  display: inline
+
+//Dropdown menu
+.nav-item-dropdown 
+  position: relative
+  
+  &:hover > .dropdown-menu 
+    display: block
+    opacity: 1
+
+.dropdown-trigger 
+  position: relative
+  
+  text-decoration: none
+  cursor: pointer
+  
+  &:focus + .dropdown-menu 
+    display: block
+    opacity: 1
+  
+  
+  &::after 
+    content: "›"
+    position: absolute
+    color: #000
+    font-size: 24px
+    font-weight: bold
+    transform: rotate(90deg)
+    top: -5px
+    right: -15px
+  
+.dropdown-menu 
+  background-color: rgb(235, 234, 231)
+  background-image: url("https://i.imgur.com/W9YCify.png")
+  display: inline-block
+  text-align: right
+  position: absolute
+  top: 2.5rem
+  right: -10px
+  display: none
+  opacity: 0
+  transition: opacity 0.5s ease
+  min-width: 80px
+  list-style: none
+  -webkit-padding-start: 0
+  padding: 0
+  a 
+    color: #000
+ 
+.dropdown-menu-item 
+  cursor: pointer
+  padding: .5rem
+  text-align: center
+  list-style: none
+  -webkit-padding-start: 0  
+  &:hover 
+    background-color: darken(rgb(235, 234, 231), 15%)
+
+.dropdown-menuOptions
+  width: 160px
+  .dropdown-menu-item
+    text-align: left
+    padding-left: .5rem
+
+// Bootstrap 3.3
+
+.glyphicon-search:before
+  content: "\e003"
+
+.glyphicon
+  position: relative
+  display: inline-block
+  font-family: 'Glyphicons Halflings'
+  -webkit-font-smoothing: antialiased
+  font-style: normal
+  font-weight: normal
+  line-height: 1
+  font-size: 2rem
+
+@font-face 
+  font-family: 'Glyphicons Halflings'
+  src: url('../fonts/glyphicons-halflings-regular.eot')
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg')
