@@ -59,18 +59,6 @@
                     Name="Journalist Three",
                     Birthday=new DateTime(1980,03,05),
                     UserName="journalist3@mail.com"
-                },
-                new UsersProfile {
-                    ID=4,
-                    Name="Admin User",
-                    Birthday=new DateTime(1985,07,12),
-                    UserName="admin@mail.com"
-                },
-                new UsersProfile {
-                    ID=5,
-                    Name="Editor User",
-                    Birthday=new DateTime(1952,05,20),
-                    UserName="editor@mail.com"
                 }
             };
             user.ForEach(uu => context.UsersProfile.AddOrUpdate(u => u.ID, uu));

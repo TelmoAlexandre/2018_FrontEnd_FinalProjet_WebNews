@@ -26,7 +26,7 @@ namespace WebNews_API_19089.Controllers
         {
 
             // Utilizo um ViewModel para receber apenas os dados mostrados na página inicial
-            var news = db.News.Select(n => new
+            var news = db.News.OrderByDescending(n => n.NewsDate).Select(n => new
             {
                 n.ID,
                 n.Title,
@@ -42,7 +42,7 @@ namespace WebNews_API_19089.Controllers
             });
         }
 
-        [HttpGet, Route("category/{categoryID}")]
+        [HttpGet, Route("Category/{categoryID}")]
         public IHttpActionResult GetNews(int categoryID)
         {
 
@@ -93,12 +93,12 @@ namespace WebNews_API_19089.Controllers
             }).ToList();
 
             // Recolher os comentários da notícia
-            var comments = newsArticle.CommentsList.Select(c => new
+            var comments = newsArticle.CommentsList.OrderByDescending(c => c.CommentDate).Select(c => new
             {
-                c.CommentDate,
+                Date = c.CommentDate.ToString("MM-dd-yyyy"),
                 c.Content,
                 c.UserProfile.Name,
-                c.UserProfile.ID
+                UserID = c.UserProfile.ID
             }).ToList();
 
             // Recolher as fotos
@@ -106,16 +106,30 @@ namespace WebNews_API_19089.Controllers
                 p.Name
             }).ToList();
 
+            // Trocar os breaks para astriscos para ser apenas um caracter
+            string allContent = newsArticle.Content.Replace("<br/>", "#");
+
+            // Separar o conteudo pelos astrisos e colocar num array
+            // Isto vai deixar alguns elementos do array vazio
+            // O que é bom, porque num forEach, coloco cada um num <p>
+            // e assim faz verdadeiros paragrafos com um espaço entre eles
+            string[] content = allContent.Split(new char[] { '#' });
+
+
+
             return Ok(new
             {
                 newsArticle.ID,
                 newsArticle.Title,
                 newsArticle.Description,
-                newsArticle.Content,
-                newsArticle.Category.Name,
-                Users = users,
-                Comments = comments,
-                Photos = photos
+                Content = content,
+                Date = newsArticle.NewsDate.ToString("MM-dd-yyyy"),
+                Time = newsArticle.NewsDate.ToString("hh:mm:ss tt"),
+                Category = newsArticle.Category.Name,
+                CategoryID = newsArticle.Category.ID,
+                Photos = photos,
+                Authors = users,
+                Comments = comments
             }
             );
 
