@@ -201,8 +201,6 @@
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\Photos.cs" />
     <Compile Include="Models\UsersProfile.cs" />
-    <Compile Include="Models\ViewModels\GetNewsViewModel.cs" />
-    <Compile Include="Models\ViewModels\NewsFrontPageViewModel.cs" />
     <Compile Include="Models\WebNewsDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -286,6 +284,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
