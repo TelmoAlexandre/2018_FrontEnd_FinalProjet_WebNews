@@ -46,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -188,6 +194,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\Comments.cs" />
+    <Compile Include="Models\News.cs" />
+    <Compile Include="Models\Photos.cs" />
+    <Compile Include="Models\UsersProfile.cs" />
+    <Compile Include="Models\WebNewsDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +212,30 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\News1.jpg" />
+    <Content Include="Images\News10.jpg" />
+    <Content Include="Images\News11.jpg" />
+    <Content Include="Images\News12.jpg" />
+    <Content Include="Images\News13.jpg" />
+    <Content Include="Images\News14.jpg" />
+    <Content Include="Images\News15.jpg" />
+    <Content Include="Images\News16.jpg" />
+    <Content Include="Images\News17.jpg" />
+    <Content Include="Images\News18.jpg" />
+    <Content Include="Images\News19.jpg" />
+    <Content Include="Images\News2.jpg" />
+    <Content Include="Images\News20.jpg" />
+    <Content Include="Images\News21.jpg" />
+    <Content Include="Images\News22.jpg" />
+    <Content Include="Images\News23.jpg" />
+    <Content Include="Images\News24.jpg" />
+    <Content Include="Images\News3.jpg" />
+    <Content Include="Images\News4.jpg" />
+    <Content Include="Images\News5.jpg" />
+    <Content Include="Images\News6.jpg" />
+    <Content Include="Images\News7.jpg" />
+    <Content Include="Images\News8.jpg" />
+    <Content Include="Images\News9.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -246,7 +283,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
