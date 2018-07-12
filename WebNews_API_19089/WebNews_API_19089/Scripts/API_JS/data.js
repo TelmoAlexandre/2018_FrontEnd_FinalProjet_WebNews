@@ -50,3 +50,16 @@ function getNewsArticle(id){
             }
         });
 }
+
+function getUserProfile(id){
+    return fetch(`/api/UserProfile/${id}`, { headers: { Accept: 'application/json' } })
+        .then(function (reponse) {
+            if (reponse.status === 200) {
+
+                return reponse.json();
+
+            } else {
+                return Promise.reject(new Error(reponse.statusText));
+            }
+        });
+}

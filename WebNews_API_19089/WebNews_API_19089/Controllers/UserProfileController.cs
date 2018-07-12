@@ -34,6 +34,7 @@ namespace WebNews_API_19089.Controllers
             var comments = user.CommentsList.Select(c => new {
                 c.Content,
                 c.CommentDate,
+                NewsID = c.News.ID,
                 User = c.UserProfile.Name
             }).ToList();
 
@@ -47,7 +48,7 @@ namespace WebNews_API_19089.Controllers
 
             return Ok(new {
                 user.Name,
-                user.Birthday,
+                Birthday = user.Birthday.ToString("MM-dd-yyyy"),
                 Email = user.UserName,
                 Comments = comments,
                 News = news

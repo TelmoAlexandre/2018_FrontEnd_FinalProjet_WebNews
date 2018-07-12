@@ -420,6 +420,79 @@ a:hover {
   text-decoration: underline;
 }
 
+.userProfile {
+  text-align: left;
+}
+
+.userProfile p {
+  font-size: 1.1em;
+}
+
+.userProfile .userName {
+  padding: 1rem;
+}
+
+.userProfile .changePasswordLink a {
+  font-size: 1.2em;
+}
+
+.userProfile .changePasswordLink a:hover {
+  text-decoration: underline;
+}
+
+.userProfile .commentsList h2 {
+  margin: 1.5rem 0 2rem;
+  font-family: "Fondamento", cursive;
+  font-weight: bold;
+}
+
+.userProfile .commentsList div::first-of-type {
+  border-top: none;
+}
+
+.userProfile .commentsList .comment {
+  padding: 2rem .5rem 2rem;
+  border-top: .06rem solid;
+}
+
+.userProfile .commentsList .comment p {
+  margin: 0;
+}
+
+.userProfile .commentsList .comment .commentHeaderContainer .commentHeaderUser {
+  font-weight: bold;
+}
+
+.userProfile .commentsList .comment .commentHeaderContainer .commentHeaderDate {
+  font-size: .8em;
+}
+
+.userProfile .commentsList .comment .commentBodyContainer {
+  margin-top: 1rem;
+}
+
+.userProfile .commentsList .newsContext {
+  text-align: right;
+  font-size: 1.2em;
+}
+
+.userProfile .commentsList .newsContext a:hover {
+  text-decoration: underline;
+}
+
+.userProfile .newsList h2 {
+  margin-top: 1.5rem;
+  padding: 0 0 1rem;
+}
+
+.userProfile .newsList a:hover {
+  text-decoration: underline;
+  font-weight: bold;
+  padding-left: .3rem;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
 img {
   width: 100%;
 }

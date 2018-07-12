@@ -351,7 +351,7 @@ function displayNewsArticle(newsPiece){
         authorLink.onclick = function (e){
             e.preventDefault();
 
-            // To-do
+            showUserProfile(author.ID);
         };
         p.appendChild(authorLink);
 
@@ -448,7 +448,7 @@ function displayNewsArticle(newsPiece){
             a.onclick = function (e){
                 e.preventDefault;
 
-                // To-do
+                showUserProfile(author.ID);
             }
             p.appendChild(a);
 
@@ -470,6 +470,170 @@ function displayNewsArticle(newsPiece){
 
 
     //#endregion
+}
+
+function showUserProfile(id){
+    
+    getUserProfile(id)
+        .then(function (user) {
+
+            displayUserProfile(user);
+
+        }).catch(function (error){
+
+            console.error(error);
+            alert("We couldn't retrieve the author's profile...");
+
+        })
+}
+
+function displayUserProfile(user){
+
+    initThisDivToShowContent(userProfile.className);
+
+    // Container dos div de informação
+    let userInfoContainer = document.createElement('div');
+    userInfoContainer.className = 'col-12'; // Bootstrap
+    userProfile.appendChild(userInfoContainer);
+
+    // 'div' com o nome do utilizador
+    let userName = document.createElement('div');
+    userName.className = 'userName';
+    userInfoContainer.appendChild(userName);
+
+    // Nome do utilizador
+    let h2UserName = document.createElement('h2');
+    h2UserName.className = 'bold';
+    h2UserName.textContent = user.Name;
+    userName.appendChild(h2UserName);
+
+    // 'div' com a informação do utilizador
+    let userInfo = document.createElement('div');
+    userInfo.className = 'col-12';
+    userInfoContainer.appendChild(userInfo);
+
+    // </hr>
+    let hr_1 = document.createElement('hr');
+    userInfo.appendChild(hr_1);
+
+    // lbl Nome do utilizador
+    let pName = document.createElement('p');
+    pName.textContent = user.Name;
+    userInfo.appendChild(pName);
+
+    // Data de nascimento
+    let pBirth = document.createElement('p');
+    pBirth.textContent = user.Birthday;
+    userInfo.appendChild(pBirth);
+
+    // Email do utilizador
+    let pEmail = document.createElement('p');
+    pEmail.textContent = user.Email;
+    userInfo.appendChild(pEmail);
+
+    // </hr>
+    let hr_2 = document.createElement('hr');
+    userInfo.appendChild(hr_2);
+
+    // 'div' que contem as noticias do autor
+    let userNews = document.createElement('div');
+    userNews.className = 'col-6 newsList'; // Bootsrap
+    userProfile.appendChild(userNews);
+
+    // lbl Author of:
+    let h2Author = document.createElement('h2');
+    h2Author.className = 'bold';
+    h2Author.textContent = 'Author of:';
+    userNews.appendChild(h2Author);
+
+    user.News.forEach(function (news) {
+
+        let p = document.createElement('p');
+        userNews.appendChild(p);
+
+        let linkNews = document.createElement('a');
+        linkNews.className = '';
+        linkNews.href = '';
+        linkNews.textContent = ` - ${ news.Title }`;
+        linkNews.onclick = function (e) {
+            e.preventDefault();
+
+            showNewsArticle(news.ID);
+        };
+        p.appendChild(linkNews);
+
+    });
+
+
+    // 'div' que contem os comentários do autor
+    let userComments = document.createElement('div');
+    userComments.className = 'commentsList col -6';
+    userProfile.appendChild(userComments);
+
+    // lbl Comments
+    let h2Comments = document.createElement('h2');
+    h2Comments.textContent = 'Comments';
+    userComments.appendChild(h2Comments);
+
+    user.Comments.forEach(function (comment) {
+
+        // 'div' do comentário
+        let divComment = document.createElement('div');
+        divComment.className = 'comment';
+        userComments.appendChild(divComment);
+
+        // Heador do comentário
+        let commentHeaderContainer = document.createElement('div');
+        commentHeaderContainer.className = 'commentHeaderContainer';
+        divComment.appendChild(commentHeaderContainer);
+
+        // Nome do utilizador do cometário
+        let p = document.createElement('p');
+        p.className = 'commentHeaderUser';
+        p.textContent = 'by ';
+        commentHeaderContainer.appendChild(p);
+
+        // Link com o nome do utilizador
+        let a = document.createElement('a');
+        a.href = '#';
+        a.textContent = comment.User;
+        a.onclick = function (e) {
+            e.preventDefault;
+
+            showUserProfile(author.ID);
+        }
+        p.appendChild(a);
+
+        // Nome do utilizador do cometário
+        let pDate = document.createElement('p');
+        pDate.className = 'commentHeaderDate';
+        pDate.textContent = comment.Date;
+        commentHeaderContainer.appendChild(pDate);
+
+        // Corpo do cometário
+        let commentBodyContainer = document.createElement('div');
+        commentBodyContainer.className = 'commentBodyContainer';
+        commentBodyContainer.textContent = comment.Content;
+        divComment.appendChild(commentBodyContainer);
+
+        let newsContext = document.createElement('div');
+        newsContext.className = 'newsContext';
+        divComment.appendChild(newsContext);
+
+        let newsContextLink = document.createElement('a');
+        newsContextLink.href = '';
+        newsContextLink.textContent = 'News Context';
+        newsContextLink.onclick = function (e) {
+            e.preventDefault();
+
+            showNewsArticle(comment.NewsID);
+        };
+
+
+    });
+
+    
+    
 }
 
 //#region Utils
