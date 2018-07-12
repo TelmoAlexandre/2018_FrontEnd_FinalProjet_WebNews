@@ -32,10 +32,10 @@ namespace WebNews_API_19089.Controllers
 
             // Recolher os comentários
             var comments = user.CommentsList.Select(c => new {
-                c.Content,
-                c.CommentDate,
+                User = c.UserProfile.Name,
+                Date = c.CommentDate.ToString("MM-dd-yyyy"),
                 NewsID = c.News.ID,
-                User = c.UserProfile.Name
+                c.Content
             }).ToList();
 
             // Recolher as noticias

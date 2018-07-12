@@ -72,7 +72,6 @@ function fillHeaderContainer() {
 
     let webpaperTitle = document.createElement('a');
     webpaperTitle.textContent = 'Web Paper';
-    webpaperTitle.href = "#";
     webpaperTitle.onclick = function (e) {
         e.preventDefault;
 
@@ -96,41 +95,51 @@ function fillHeaderContainer() {
     getCategories()
         .then(function (categories) {
 
-            // Link 'All'
-            let catLink = document.createElement('a');
-            catLink.className = 'categoryLink';
-            catLink.textContent = 'All';
-            catLink.href = "#";
-            catLink.onclick = function (e) {
-                e.preventDefault();
-
-                showAllNews();
-
-            };
-            $('.headerLinks').append(catLink);
-
-            // Resto das categorias
-            categories.forEach(function (category) {
-
-                let catLink = document.createElement('a');
-                catLink.className = 'categoryLink';
-                catLink.textContent = `${category.Name}`;
-                catLink.href = "#";
-                catLink.onclick = function (e) {
-                    e.preventDefault();
-
-                    showCategoryNews(category.ID);
-
-                };
-                $('.headerLinks').append(catLink);
-
-            });
+            displayCategories(categories);
 
         })
         .catch(function (error) {
             console.error(error);
             alert("We couldn't retrieve the categories...");
         })
+
+}
+
+/**
+ * 
+ * Recebe Json com categorias e faz o seu display na top bar.
+ * 
+ * @param {any} categories
+ */
+function displayCategories(categories) {
+
+    // Link 'All'
+    let catLink = document.createElement('a');
+    catLink.className = 'categoryLink';
+    catLink.textContent = 'All';
+    catLink.onclick = function (e) {
+        e.preventDefault();
+
+        showAllNews();
+
+    };
+    $('.headerLinks').append(catLink);
+
+    // Resto das categorias
+    categories.forEach(function (category) {
+
+        let catLink = document.createElement('a');
+        catLink.className = 'categoryLink';
+        catLink.textContent = `${category.Name}`;
+        catLink.onclick = function (e) {
+            e.preventDefault();
+
+            showCategoryNews(category.ID);
+
+        };
+        $('.headerLinks').append(catLink);
+
+    });
 
 }
 
@@ -210,7 +219,6 @@ function showNews(news) {
 
         // Link que se encontra dentro do 'h1' do titulo da noticia
         let newsLink = document.createElement('a');
-        newsLink.href = '#';
         newsLink.textContent = newsArticle.Title;
         newsLink.onclick = function (e) {
             e.preventDefault();
@@ -259,6 +267,7 @@ function displayNewsArticle(newsPiece){
     // 'div' que contém os comentários
     let newsCommentsContainer = document.createElement('div');
     newsCommentsContainer.className = 'col-12 newsCommentsContainer'; // Bootstrap
+    newsCommentsContainer.id = 'newsCommentsContainer';
     newsArticle.appendChild(newsCommentsContainer);
 
     //#endregion
@@ -295,7 +304,6 @@ function displayNewsArticle(newsPiece){
     // Link da categoria da noticia
     let linkCategory = document.createElement('a');
     linkCategory.className = 'bold';
-    linkCategory.href = '#';
     linkCategory.textContent = ` - ${newsPiece.Category} - `;
     linkCategory.onclick = function (e){
         e.preventDefault();
@@ -346,7 +354,6 @@ function displayNewsArticle(newsPiece){
 
         // Link para o perfil do autor
         let authorLink = document.createElement('a');
-        authorLink.href = '#';
         authorLink.textContent = author.Name;
         authorLink.onclick = function (e){
             e.preventDefault();
@@ -423,53 +430,100 @@ function displayNewsArticle(newsPiece){
 
         h2.textContent = 'Comments';
 
-        newsPiece.Comments.forEach(function (comment){
-
-            // 'div' do comentário
-            let divComment = document.createElement('div');
-            divComment.className = 'comment';
-            commentsList.appendChild(divComment);
-
-            // Heador do comentário
-            let commentHeaderContainer = document.createElement('div');
-            commentHeaderContainer.className = 'commentHeaderContainer';
-            divComment.appendChild(commentHeaderContainer);
-
-            // Nome do utilizador do cometário
-            let p = document.createElement('p');
-            p.className = 'commentHeaderUser';
-            p.textContent = 'by ';
-            commentHeaderContainer.appendChild(p);
-
-            // Link com o nome do utilizador
-            let a = document.createElement('a');
-            a.href = '#';
-            a.textContent = comment.Name;
-            a.onclick = function (e){
-                e.preventDefault;
-
-                showUserProfile(author.ID);
-            }
-            p.appendChild(a);
-
-            // Nome do utilizador do cometário
-            let pDate = document.createElement('p');
-            pDate.className = 'commentHeaderDate';
-            pDate.textContent = comment.Date;
-            commentHeaderContainer.appendChild(pDate);
-
-            // Corpo do cometário
-            let commentBodyContainer = document.createElement('div');
-            commentBodyContainer.className = 'commentBodyContainer';
-            commentBodyContainer.textContent = comment.Content;
-            divComment.appendChild(commentBodyContainer);
-            
-        });
+        displayComments(newsPiece.Comments, newsCommentsContainer.id);
 
     }
 
 
     //#endregion
+}
+
+/**
+ * 
+ * Recebe a lista de comments e o div pai onde os deve colocar
+ * 
+ * @param {any} comments
+ * @param {any} divID
+ */
+function displayComments(comments, divID) {
+
+    // Booleano que permite saber se os comments estao a ser escritos
+    // num newsArticle ou no perfil do utilizador
+    let newsArticle = (comments[0].UserID != null) ? true : false;
+
+    comments.forEach(function (comment) {
+
+        // 'div' do comentário inteiro
+        let commentContainer = document.createElement('div');
+        commentContainer.className = 'comment';
+        $(`#${divID}`).append(commentContainer);
+
+        // Contem o link do nome do utilizador e a data
+        let commentHeaderContainer = document.createElement('div');
+        commentHeaderContainer.className = 'commentHeaderContainer';
+        commentContainer.appendChild(commentHeaderContainer);
+
+        // Paragrafo que ira conter o link com o nome do utilizador
+        let p = document.createElement('p');
+        p.className = 'commentHeaderUser';
+
+        // Saber se e necessario criar link para a pagina do autor
+        // o link so sera necessario se nos os comments estiverem na pagina NewsArticle
+        //
+        // A alternativa, sera que os comments se encontram no perfil
+        // do utilizador, o que nesse caso nao e necessario o link para o perfil
+        p.textContent = (newsArticle) ? 'by ' : `by ${comment.User}`;
+        commentHeaderContainer.appendChild(p);
+
+        // Link para o perfil do utilizador, caso nos encontremos na page NewsArticle
+        if (newsArticle) {
+            // Link com o nome do utilizador
+            let commentNameLink = document.createElement('a');
+            commentNameLink.textContent = comment.User;
+            commentNameLink.onclick = function (e) {
+                e.preventDefault;
+
+                showUserProfile(comment.UserID);
+            };
+            p.appendChild(commentNameLink);
+        }
+        
+        // Data do comentario
+        let pDate = document.createElement('p');
+        pDate.className = 'commentHeaderDate';
+        pDate.textContent = comment.Date;
+        commentHeaderContainer.appendChild(pDate);
+
+        // Corpo do comentario
+        let commentBodyContainer = document.createElement('div');
+        commentBodyContainer.className = 'commentBodyContainer';
+        commentBodyContainer.textContent = comment.Content;
+        commentContainer.appendChild(commentBodyContainer);
+
+        // Caso os comments estejam a ser escritos no perfil do utilizador
+        // criar um link para a noticia onde o comentario se encontra
+        if (!newsArticle) {
+
+            // div que ira conter o link para a noticia do comentario
+            let newsContextContainer = document.createElement('div');
+            newsContextContainer.className = 'newsContext';
+            commentContainer.appendChild(newsContextContainer);
+
+            // Link para a noticia
+            let newsLink = document.createElement('a');
+            newsLink.className = 'bold';
+            newsLink.textContent = 'News Context';
+            newsLink.onclick = function (e) {
+                e.preventDefault();
+
+                showNewsArticle(comment.NewsID);
+            };
+            newsContextContainer.appendChild(newsLink);
+            
+        }
+
+    });
+
 }
 
 function showUserProfile(id){
@@ -553,7 +607,6 @@ function displayUserProfile(user){
 
         let linkNews = document.createElement('a');
         linkNews.className = '';
-        linkNews.href = '';
         linkNews.textContent = ` - ${ news.Title }`;
         linkNews.onclick = function (e) {
             e.preventDefault();
@@ -564,75 +617,18 @@ function displayUserProfile(user){
 
     });
 
-
     // 'div' que contem os comentários do autor
-    let userComments = document.createElement('div');
-    userComments.className = 'commentsList col -6';
-    userProfile.appendChild(userComments);
+    let commentsContainer = document.createElement('div');
+    commentsContainer.className = 'commentsListUserProfile col-6';
+    commentsContainer.id = 'commentsListUserProfile';
+    userProfile.appendChild(commentsContainer);
 
     // lbl Comments
     let h2Comments = document.createElement('h2');
     h2Comments.textContent = 'Comments';
-    userComments.appendChild(h2Comments);
+    commentsContainer.appendChild(h2Comments);
 
-    user.Comments.forEach(function (comment) {
-
-        // 'div' do comentário
-        let divComment = document.createElement('div');
-        divComment.className = 'comment';
-        userComments.appendChild(divComment);
-
-        // Heador do comentário
-        let commentHeaderContainer = document.createElement('div');
-        commentHeaderContainer.className = 'commentHeaderContainer';
-        divComment.appendChild(commentHeaderContainer);
-
-        // Nome do utilizador do cometário
-        let p = document.createElement('p');
-        p.className = 'commentHeaderUser';
-        p.textContent = 'by ';
-        commentHeaderContainer.appendChild(p);
-
-        // Link com o nome do utilizador
-        let a = document.createElement('a');
-        a.href = '#';
-        a.textContent = comment.User;
-        a.onclick = function (e) {
-            e.preventDefault;
-
-            showUserProfile(author.ID);
-        }
-        p.appendChild(a);
-
-        // Nome do utilizador do cometário
-        let pDate = document.createElement('p');
-        pDate.className = 'commentHeaderDate';
-        pDate.textContent = comment.Date;
-        commentHeaderContainer.appendChild(pDate);
-
-        // Corpo do cometário
-        let commentBodyContainer = document.createElement('div');
-        commentBodyContainer.className = 'commentBodyContainer';
-        commentBodyContainer.textContent = comment.Content;
-        divComment.appendChild(commentBodyContainer);
-
-        let newsContext = document.createElement('div');
-        newsContext.className = 'newsContext';
-        divComment.appendChild(newsContext);
-
-        let newsContextLink = document.createElement('a');
-        newsContextLink.href = '';
-        newsContextLink.textContent = 'News Context';
-        newsContextLink.onclick = function (e) {
-            e.preventDefault();
-
-            showNewsArticle(comment.NewsID);
-        };
-
-
-    });
-
-    
+    displayComments(user.Comments, commentsContainer.id);   
     
 }
 

@@ -95,10 +95,10 @@ namespace WebNews_API_19089.Controllers
             // Recolher os comentários da notícia
             var comments = newsArticle.CommentsList.OrderByDescending(c => c.CommentDate).Select(c => new
             {
+                User = c.UserProfile.Name,
                 Date = c.CommentDate.ToString("MM-dd-yyyy"),
-                c.Content,
-                c.UserProfile.Name,
-                UserID = c.UserProfile.ID
+                UserID = c.UserProfile.ID,
+                c.Content
             }).ToList();
 
             // Recolher as fotos

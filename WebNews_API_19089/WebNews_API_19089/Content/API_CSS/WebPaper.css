@@ -17,6 +17,7 @@ a {
 a:hover {
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 
 .bold {
@@ -355,68 +356,47 @@ a:hover {
   transition: .5s;
 }
 
-.newsCommentsContainer .commentNew {
-  padding: 2rem 0;
-}
-
-.newsCommentsContainer .commentNew .commentContent {
-  width: 60%;
-  height: 5rem;
-  background-color: #ededed;
-}
-
-.newsCommentsContainer .commentNew .commentSubmit input {
-  padding-left: 0;
-  font-weight: bold;
-}
-
-.newsCommentsContainer .commentNew .commentSubmit input:hover {
-  padding-left: .5rem;
-  -webkit-transition: .5s;
-  transition: .5s;
-}
-
 .newsCommentsContainer .commentsList h2 {
   margin: 1.5rem 0 2rem;
   font-family: "Fondamento", cursive;
   font-weight: bold;
 }
 
-.newsCommentsContainer .commentsList div::first-of-type {
+.newsCommentsContainer div::first-of-type {
   border-top: none;
 }
 
-.newsCommentsContainer .commentsList .comment {
+.newsCommentsContainer .comment {
   padding: 2rem .5rem 2rem;
   border-top: .06rem solid;
 }
 
-.newsCommentsContainer .commentsList .comment p {
+.newsCommentsContainer .comment p {
   margin: 0;
 }
 
-.newsCommentsContainer .commentsList .comment .commentHeaderContainer .commentHeaderUser {
+.newsCommentsContainer .comment .commentHeaderContainer .commentHeaderUser {
   font-weight: bold;
 }
 
-.newsCommentsContainer .commentsList .comment .commentHeaderContainer .commentHeaderUser a:hover {
+.newsCommentsContainer .comment .commentHeaderContainer .commentHeaderUser a:hover {
   text-decoration: underline;
 }
 
-.newsCommentsContainer .commentsList .comment .commentHeaderContainer .commentHeaderDate {
+.newsCommentsContainer .comment .commentHeaderContainer .commentHeaderDate {
   font-size: .8em;
 }
 
-.newsCommentsContainer .commentsList .comment .commentBodyContainer {
+.newsCommentsContainer .comment .commentBodyContainer {
   margin-top: 1rem;
 }
 
-.newsCommentsContainer .commentsList .commentDeleteOption {
+.newsCommentsContainer .comment .commentDeleteOption {
   text-align: right;
   font-size: 1.2em;
 }
 
-.newsCommentsContainer .commentsList .commentDeleteOption a:hover {
+.newsCommentsContainer .comment .commentDeleteOption a:hover {
   text-decoration: underline;
 }
 
@@ -440,43 +420,43 @@ a:hover {
   text-decoration: underline;
 }
 
-.userProfile .commentsList h2 {
+.userProfile .commentsListUserProfile h2 {
   margin: 1.5rem 0 2rem;
   font-family: "Fondamento", cursive;
   font-weight: bold;
 }
 
-.userProfile .commentsList div::first-of-type {
+.userProfile .commentsListUserProfile div::first-of-type {
   border-top: none;
 }
 
-.userProfile .commentsList .comment {
+.userProfile .commentsListUserProfile .comment {
   padding: 2rem .5rem 2rem;
   border-top: .06rem solid;
 }
 
-.userProfile .commentsList .comment p {
+.userProfile .commentsListUserProfile .comment p {
   margin: 0;
 }
 
-.userProfile .commentsList .comment .commentHeaderContainer .commentHeaderUser {
+.userProfile .commentsListUserProfile .comment .commentHeaderContainer .commentHeaderUser {
   font-weight: bold;
 }
 
-.userProfile .commentsList .comment .commentHeaderContainer .commentHeaderDate {
+.userProfile .commentsListUserProfile .comment .commentHeaderContainer .commentHeaderDate {
   font-size: .8em;
 }
 
-.userProfile .commentsList .comment .commentBodyContainer {
+.userProfile .commentsListUserProfile .comment .commentBodyContainer {
   margin-top: 1rem;
 }
 
-.userProfile .commentsList .newsContext {
+.userProfile .commentsListUserProfile .newsContext {
   text-align: right;
   font-size: 1.2em;
 }
 
-.userProfile .commentsList .newsContext a:hover {
+.userProfile .commentsListUserProfile .newsContext a:hover {
   text-decoration: underline;
 }
 

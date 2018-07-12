@@ -15,6 +15,7 @@ a
   &:hover
     text-decoration: none
     color: black
+    cursor: pointer
 
 .bold
   font-weight: bold
@@ -251,49 +252,36 @@ a
         text-decoration: underline
         padding: 0 0 0 .3rem
         transition: .5s
-  .commentNew
-    padding: 2rem 0
-    .commentContent
-        width: 60%
-        height: 5rem
-        background-color: rgb(237, 237, 237)
-    .commentSubmit
-      input
-        padding-left: 0
-        font-weight: bold
-        &:hover
-          padding-left: .5rem
-          transition: .5s
   .commentsList
     h2
       margin: 1.5rem 0 2rem
       font-family: "Fondamento", cursive
       font-weight: bold
-    div::first-of-type
-      border-top: none
-    .comment
-      padding: 2rem .5rem 2rem
-      border-top: .06rem solid
-      p
-        margin: 0
-      .commentHeaderContainer
-        .commentHeaderUser
-          font-weight: bold
-          a
-            &:hover
-              text-decoration: underline
-        .commentHeaderDate
-          font-size: .8em
-      
-      .commentBodyContainer
-        margin-top: 1rem
+  div::first-of-type
+    border-top: none
+  .comment
+    padding: 2rem .5rem 2rem
+    border-top: .06rem solid
+    p
+      margin: 0
+    .commentHeaderContainer
+      .commentHeaderUser
+        font-weight: bold
+        a
+          &:hover
+            text-decoration: underline
+      .commentHeaderDate
+        font-size: .8em
+    
+    .commentBodyContainer
+      margin-top: 1rem
     .commentDeleteOption
       text-align: right
       font-size: 1.2em
       a
         &:hover
           text-decoration: underline
-  
+    
 .userProfile
   text-align: left
   p
@@ -305,7 +293,7 @@ a
       font-size: 1.2em
       &:hover
         text-decoration: underline
-  .commentsList
+  .commentsListUserProfile
     h2
       margin: 1.5rem 0 2rem
       font-family: "Fondamento", cursive
