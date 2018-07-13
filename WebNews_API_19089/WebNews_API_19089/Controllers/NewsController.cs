@@ -193,6 +193,56 @@ namespace WebNews_API_19089.Controllers
 
         }
         #endregion
-        
+
+        #region Search News
+
+        [HttpGet, Route("Category/{categoryName}/Search/{searchValue}")]
+        public IHttpActionResult GetNewsSearchFilter(string categoryName, string searchValue)
+        {
+
+            ICollection<NewsBlockViewModel> newsOutput;
+
+            // Verficar a categoria
+            if (categoryName != "All")
+            {
+
+                newsOutput = db.News.Where(n => n.Category.Name == categoryName)
+                                .Where(n => n.Title.Contains(searchValue))
+                                .OrderByDescending(n => n.NewsDate)
+                                .Select(n => new NewsBlockViewModel {
+
+                                    ID = n.ID,
+                                    Title = n.Title,
+                                    Description = n.Description
+
+                            }).ToList();
+
+            }
+            else
+            {
+                newsOutput = db.News.Where(n => n.Title.Contains(searchValue))
+                               .OrderByDescending(n => n.NewsDate)
+                               .Select(n => new NewsBlockViewModel
+                               {
+
+                                   ID = n.ID,
+                                   Title = n.Title,
+                                   Description = n.Description
+
+                               }).ToList();
+            }
+
+            return Ok(new NewsOutputViewModel {
+                News = newsOutput,
+                Category = categoryName,
+                PageNum = 1,
+                // Booleanos a verdade para não aparecer opções
+                // de paginação no site
+                FirstPage = true,
+                LastPage = true
+            });
+        }
+
+        #endregion
     }
 }

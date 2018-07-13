@@ -190,6 +190,22 @@ function displayNews(news) {
     categoryTitle.textContent = news.Category;
     newsCategory.appendChild(categoryTitle);
 
+    // Container da searchBox
+    let searchInputContainer = document.createElement('div');
+    searchInputContainer.className = 'searchInput col-12';
+    newsContainer.appendChild(searchInputContainer);
+
+    let searchBox = document.createElement('input');
+    searchBox.className = 'search-box';
+    searchBox.placeholder = 'Search...';
+    searchBox.type = 'text';
+    searchBox.onchange = function (e) {
+        e.preventDefault();
+        
+        processSearch(news.Category ,this.value);
+    };
+    searchInputContainer.appendChild(searchBox);
+
     news.News.forEach(function (newsArticle) {
 
         // Criar o bloco da noticia
@@ -220,6 +236,21 @@ function displayNews(news) {
         newsBlock.appendChild(description);
     });
 
+    // Caso não existam noticias, mostra uma mensagem
+    if (news.News[0] == null) {
+
+        let noNewsFoundContainer = document.createElement('div');
+        noNewsFoundContainer.className = 'col-12 noNewsFoundContainer';
+        newsContainer.appendChild(noNewsFoundContainer);
+
+        let h2NoNewsFound = document.createElement('h2');
+        h2NoNewsFound.className = 'bold';
+        h2NoNewsFound.textContent = 'No News found.'
+        noNewsFoundContainer.appendChild(h2NoNewsFound);
+
+    }
+
+
     // Contem os links para a proxima pagina e para a anterior
     let pageOptionsConainter = document.createElement('div');
     pageOptionsConainter.className = 'col-12 row pageOptions';
@@ -234,14 +265,13 @@ function displayNews(news) {
     let nextPageLinkContainer = document.createElement('div');
     nextPageLinkContainer.className = 'nextPage col-6';
     pageOptionsConainter.appendChild(nextPageLinkContainer);
-
     // Caso seja a primeira página, não mostrar o link para a
     // página anterior
     if (!news.FirstPage) {
 
         let previousPageLink = document.createElement('a');
         previousPageLink.textContent = '< Previous Page';
-        previousPageLink.onclick = function (e) {
+        previousPageLink.onsubmit = function (e) {
             e.preventDefault();
 
             showAllNews(news.Category, news.PageNum - 1);
@@ -264,6 +294,22 @@ function displayNews(news) {
         nextPageLinkContainer.appendChild(nextPageLink);
 
     }
+}
+
+function processSearch(categoryName, searchValue) {
+
+    getNewsSearchFilter(categoryName, searchValue)
+        .then(function (news) {
+
+            displayNews(news);
+
+        }).catch(function (error) {
+
+            console.error(error);
+            alert("We couldn't retrieve the news article...");
+
+        })
+
 }
 
 function showNewsArticle(id) {

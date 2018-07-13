@@ -2,7 +2,7 @@ $tl: 1s;
   
 body
   background-color: rgb(235, 234, 231)
-  background-image: url("https://i.imgur.com/W9YCify.png")
+  background-image: url("https://i.imgur.com/VVTTgNT.png")
   padding: 0rem
   margin: 0rem
   font-size: 1rem
@@ -89,6 +89,23 @@ a
       &:hover
         text-decoration: underline
     
+.searchInput
+  input
+    font-weight: bold
+  .search-box
+    height: 60px
+    width: 300px
+    border-radius: 30px
+    border: none
+    outline: none
+    padding-left: 15px
+    background: rgb(210, 210, 210)
+    background-image: url("https://i.imgur.com/VVTTgNT.png")
+    color: black
+
+.noNewsFoundContainer
+  padding: 6rem 0 0
+
 .pageOptions
   padding: 4rem 0 2rem
   .previousPage,.nextPage
@@ -108,64 +125,9 @@ a
         padding-left: 1rem
         transition: .5s
 
-// Lista das categorias ----------------------------------------------------------------------------
-.newsCategory
+// Lista das categorias
+  .newsCategory
   padding: 2rem 0 0
-
-
-.searchOption
-  input
-    font-weight: bold
-    &:hover
-      text-decoration: underline
-  .searchInput
-    padding-left: 7.5rem
-  .searchInputManager
-    padding-left: 1rem
-  .search-box
-    transition: width $tl, border-radius $tl, background $tl, box-shadow $tl
-    width: 60px
-    height: 60px
-    border-radius: 30px
-    border: none
-    cursor: pointer
-    background-color: rgb(235, 234, 231)
-    background-image: url("https://i.imgur.com/W9YCify.png")
-    color: black
-    & + label .search-icon  
-      color: black    
-    &:hover
-      color: white
-    &:focus
-      transition: width $tl cubic-bezier(0,1.22,.66,1.39), border-radius $tl, background $tl
-      border: none
-      outline: none
-      box-shadow: none
-      padding-left: 15px
-      cursor: text
-      width: 300px
-      border-radius: auto
-      background: rgb(210, 210, 210)
-      background-image: url("https://i.imgur.com/W9YCify.png")
-      color: black
-      & + label .search-icon    
-        display: none
-    &:not(:focus)     
-      text-indent: -5000px  
-
-#search-submit 
-  position: relative
-  left: -5000px
-
-.search-icon
-  position: relative
-  left: -51px
-  top: 11px
-  color: white
-  cursor: pointer
-
-.noFoundNews
-  padding: 6rem 0 0
 
 // News/Details/{id}
 .newsDetail
@@ -231,6 +193,7 @@ a
       margin: 0 0 1.5rem
   
 //Comments --------------------------------------------------------------------------
+
 .newsCommentsContainer
   border-top: .6rem double
   margin-top: 4rem
@@ -321,7 +284,6 @@ a
         padding-left: .3rem
         transition: .3s 
 
-
 img
   width: 100%
 
@@ -333,27 +295,6 @@ img
   padding: .3rem 0rem
   border-top: 0.19rem double black
   border-bottom: 0.19rem double black
-
-// Bootstrap 3.3
-
-.glyphicon-search:before
-  content: "\e003"
-
-.glyphicon
-  position: relative
-  display: inline-block
-  font-family: 'Glyphicons Halflings'
-  -webkit-font-smoothing: antialiased
-  font-style: normal
-  font-weight: normal
-  line-height: 1
-  font-size: 2rem
-
-@font-face 
-  font-family: 'Glyphicons Halflings'
-  src: url('../fonts/glyphicons-halflings-regular.eot')
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg')
-
 
 // Media Size
 
