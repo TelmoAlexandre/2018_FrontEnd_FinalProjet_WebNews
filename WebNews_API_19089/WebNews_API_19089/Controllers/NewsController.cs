@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebNews_API_19089.Models;
+using WebNews_API_19089.Models.ViewModels;
 
 namespace WebNews_API_19089.Controllers
 {
@@ -25,20 +26,40 @@ namespace WebNews_API_19089.Controllers
         public IHttpActionResult GetNews()
         {
 
+            // Número de notícias por página
+            const int newsPerPage = 6;
+
+            // Recolher as noticias da primeira página
+            var newsFirstPage = db.News.OrderByDescending(n => n.NewsDate).Take(newsPerPage).ToList();
+
+            // Descobre a última noticia de todas
+            // Aparentemente por causa de uma limitação por parte do SQL, não existe 'SELECT BOTTOM'
+            // O que significa que terei que inverter a ordem das noticias para ordem ascendente e agarrar
+            // a primeira. Desta forma estou na realidade a agarrar a última noticia -.-'
+            var lastNewsArticleID = db.News.OrderBy(n => n.NewsDate).First();
+
+            // Caso a ultima noticia de todas se encontre na primeira página
+            bool lastPage = (newsFirstPage.Contains(lastNewsArticleID)) ? true : false;
+
             // Utilizo um ViewModel para receber apenas os dados mostrados na página inicial
-            var news = db.News.OrderByDescending(n => n.NewsDate).Select(n => new
+            var newsOutput = newsFirstPage.Select(n => new NewsBlockViewModel
             {
-                n.ID,
-                n.Title,
-                n.Description
+                ID = n.ID,
+                Title = n.Title,
+                Description = n.Description
             }).ToList();
 
             // Retorno outro view model que contem um ICollection<NewsFrontPageViewModel>
             // e uma string com a categoria
-            return Ok(new
+            return Ok(new NewsOutputViewModel
             {
-                News = news,
-                Category = "All"
+                News = newsOutput,
+                Category = "All",
+                // Como este é o método geral de pedir noticias, será sempre a primeira página
+                PageNum = 1,
+                // Estes booleanos iram informar no Json se é necessário mostrar o butao para a proxima página
+                FirstPage = true,
+                LastPage = lastPage
             });
         }
 
@@ -136,5 +157,6 @@ namespace WebNews_API_19089.Controllers
         }
         #endregion
 
+        
     }
 }

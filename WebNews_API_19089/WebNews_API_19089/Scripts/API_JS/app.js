@@ -164,7 +164,7 @@ function showAllNews() {
     getNews()
         .then(function (news) {
 
-            showNews(news);
+            displayNews(news);
 
         })
         .catch(function (error) {
@@ -180,7 +180,7 @@ function showCategoryNews(category) {
     getNewsCategory(category)
         .then(function (news) {
 
-            showNews(news);
+            displayNews(news);
 
         }).catch(function (error) {
 
@@ -190,14 +190,14 @@ function showCategoryNews(category) {
         })
 }
 
-function showNews(news) {
+function displayNews(news) {
 
     initThisDivToShowContent(newsContainer.className);
 
     // 'div' que contém a categoria
     let newsCategory = document.createElement('div');
     newsCategory.className = 'col-12 center newsCategory'; // Bootstrap
-    $('.newsContainer').append(newsCategory);
+    newsContainer.appendChild(newsCategory);
 
     // Nome da categoria
     let categoryTitle = document.createElement('h1');
@@ -210,7 +210,7 @@ function showNews(news) {
         // Criar o bloco da noticia
         let newsBlock = document.createElement('div');
         newsBlock.className = 'newsBlock col-4'; // Bootstrap
-        $('.newsContainer').append(newsBlock);
+        newsContainer.appendChild(newsBlock);
 
         // Titulo da noticia
         let newsTitle = document.createElement('h1');
@@ -233,8 +233,52 @@ function showNews(news) {
         description.className = 'newsDescription';
         description.textContent = newsArticle.Description;
         newsBlock.appendChild(description);
-
     });
+
+    // Contem os links para a proxima pagina e para a anterior
+    let pageOptionsConainter = document.createElement('div');
+    pageOptionsConainter.className = 'col-12 row pageOptions';
+    newsContainer.appendChild(pageOptionsConainter);
+
+    // div para o link da pagina anterior
+    let previousPageLinkContainer = document.createElement('div');
+    previousPageLinkContainer.className = 'previousPage col-6';
+    pageOptionsConainter.appendChild(previousPageLinkContainer);
+
+    // div para o link da proxima pagina
+    let nextPageLinkContainer = document.createElement('div');
+    nextPageLinkContainer.className = 'nextPage col-6';
+    pageOptionsConainter.appendChild(nextPageLinkContainer);
+
+    // Caso seja a primeira página, não mostrar o link para a
+    // página anterior
+    if (!news.FirstPage) {
+
+        let previousPageLink = document.createElement('a');
+        previousPageLink.textContent = 'Previous Page';
+        previousPageLink.onclick = function (e) {
+            e.preventDefault();
+
+            // TO-DO
+        };
+        previousPageLinkContainer.appendChild(previousPageLink);
+
+    }
+
+    // Caso seja a ultima página, não mostrar o link para a
+    // proxima página
+    if (!news.LastPage) {
+
+        let nextPageLink = document.createElement('a');
+        nextPageLink.textContent = 'Next Page';
+        nextPageLink.onclick = function (e) {
+            e.preventDefault();
+
+            // TO-DO
+        };
+        nextPageLinkContainer.appendChild(nextPageLink);
+
+    }
 }
 
 function showNewsArticle(id) {

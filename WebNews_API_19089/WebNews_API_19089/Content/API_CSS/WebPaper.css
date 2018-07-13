@@ -119,6 +119,31 @@ a:hover {
   text-decoration: underline;
 }
 
+.pageOptions {
+  padding: 4rem 0 2rem;
+}
+
+.pageOptions .previousPage, .pageOptions .nextPage {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.pageOptions .previousPage a:hover, .pageOptions .nextPage a:hover {
+  text-decoration: underline;
+}
+
+.pageOptions .previousPage a:hover {
+  padding-right: 1rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.pageOptions .nextPage a:hover {
+  padding-left: 1rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
 .newsCategory {
   padding: 2rem 0 0;
 }

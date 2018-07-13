@@ -89,6 +89,25 @@ a
       &:hover
         text-decoration: underline
     
+.pageOptions
+  padding: 4rem 0 2rem
+  .previousPage,.nextPage
+    font-weight: bold
+    font-size: 1.4em
+    a
+      &:hover
+        text-decoration: underline
+  .previousPage
+    a
+      &:hover
+        padding-right: 1rem
+        transition: .5s
+  .nextPage
+    a
+      &:hover
+        padding-left: 1rem
+        transition: .5s
+
 // Lista das categorias ----------------------------------------------------------------------------
 .newsCategory
   padding: 2rem 0 0
@@ -340,26 +359,26 @@ img
 
 @media only screen and (max-width:1199px)
   .newsDetail > .col-6
+    -ms-flex: 0 0 100%
+    flex: 0 0 100%
+    max-width: 100%
+  .newsDetail, .newsArticle, .newsDetailHeaderContainer
+    padding-right: 0 !important
+  .newsDetailBodyContainer
+    padding: 1rem 1rem !important
+  .newsBlock
+    h1:hover
+      padding-left: 1rem
+      text-decoration: underline
+  .userProfile
+    .col-6
       -ms-flex: 0 0 100%
       flex: 0 0 100%
       max-width: 100%
-  .newsDetail, .newsArticle, .newsDetailHeaderContainer
-      padding-right: 0 !important
-  .newsDetailBodyContainer
-      padding: 1rem 1rem !important
-  .newsBlock
-      h1:hover
-          padding-left: 1rem
-          text-decoration: underline
-  .userProfile
-      .col-6
-          -ms-flex: 0 0 100%
-          flex: 0 0 100%
-          max-width: 100%
-      .col-12 .col-12
-          padding: 0 .5rem
+    .col-12 .col-12
+      padding: 0 .5rem
   .mobileSeparator
-      display: block !important
+    display: block !important
 
 @media only screen and (min-width:768px) and  (max-width:1199px)
   .col-4 
