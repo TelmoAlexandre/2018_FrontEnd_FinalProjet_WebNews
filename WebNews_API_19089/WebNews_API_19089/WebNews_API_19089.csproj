@@ -207,9 +207,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Content\API_CSS\Media_CSS\WebPaper_300.css" />
-    <Content Include="Content\API_CSS\Media_CSS\WebPaper_600.css" />
-    <Content Include="Content\API_CSS\Media_CSS\WebPaper_768.css" />
     <Content Include="Content\API_CSS\WebPaper.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -297,12 +294,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\API_CSS\Media_CSS\WebPaper_300.css.map" />
-    <Content Include="Content\API_CSS\Media_CSS\WebPaper_300.sass" />
-    <Content Include="Content\API_CSS\Media_CSS\WebPaper_600.css.map" />
-    <Content Include="Content\API_CSS\Media_CSS\WebPaper_600.sass" />
-    <Content Include="Content\API_CSS\Media_CSS\WebPaper_768.css.map" />
-    <Content Include="Content\API_CSS\Media_CSS\WebPaper_768.sass" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
