@@ -207,14 +207,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\API_CSS\bootstrap.css" />
-    <Content Include="Content\API_CSS\bootstrap.min.css" />
-    <Content Include="Content\API_CSS\DropdownMenus.css" />
-    <Content Include="Content\API_CSS\Site.css" />
+    <Content Include="Content\API_CSS\Media_CSS\WebPaper_300.css" />
+    <Content Include="Content\API_CSS\Media_CSS\WebPaper_600.css" />
+    <Content Include="Content\API_CSS\Media_CSS\WebPaper_768.css" />
     <Content Include="Content\API_CSS\WebPaper.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -246,8 +241,6 @@
     <Content Include="Index.html" />
     <Content Include="Scripts\API_JS\app.js" />
     <Content Include="Scripts\API_JS\data.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -272,12 +265,6 @@
     </Content>
     <Content Include="Content\API_CSS\WebPaper.css.map" />
     <Content Include="Content\API_CSS\WebPaper.sass" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -287,7 +274,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Content\Site.css" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -311,21 +297,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.min.css.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\bootstrap.css.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css.map" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Content\API_CSS\Media_CSS\WebPaper_300.css.map" />
+    <Content Include="Content\API_CSS\Media_CSS\WebPaper_300.sass" />
+    <Content Include="Content\API_CSS\Media_CSS\WebPaper_600.css.map" />
+    <Content Include="Content\API_CSS\Media_CSS\WebPaper_600.sass" />
+    <Content Include="Content\API_CSS\Media_CSS\WebPaper_768.css.map" />
+    <Content Include="Content\API_CSS\Media_CSS\WebPaper_768.sass" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

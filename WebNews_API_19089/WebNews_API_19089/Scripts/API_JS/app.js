@@ -237,14 +237,14 @@ function showNews(news) {
     });
 }
 
-function showNewsArticle(id){
-    
+function showNewsArticle(id) {
+
     getNewsArticle(id)
         .then(function (newsPiece) {
 
             displayNewsArticle(newsPiece);
 
-        }).catch(function (error){
+        }).catch(function (error) {
 
             console.error(error);
             alert("We couldn't retrieve the news articles...");
@@ -253,7 +253,7 @@ function showNewsArticle(id){
 
 }
 
-function displayNewsArticle(newsPiece){
+function displayNewsArticle(newsPiece) {
 
     initThisDivToShowContent(newsArticle.className);
 
@@ -305,7 +305,7 @@ function displayNewsArticle(newsPiece){
     let linkCategory = document.createElement('a');
     linkCategory.className = 'bold';
     linkCategory.textContent = ` - ${newsPiece.Category} - `;
-    linkCategory.onclick = function (e){
+    linkCategory.onclick = function (e) {
         e.preventDefault();
 
         showCategoryNews(newsPiece.CategoryID);
@@ -320,7 +320,7 @@ function displayNewsArticle(newsPiece){
     newsDetailHeaderContainer.appendChild(newsDetailHeaderImagesContainer);
 
     // Mostrar as fotografias
-    newsPiece.Photos.forEach(function (photo){
+    newsPiece.Photos.forEach(function (photo) {
 
         // 'img' para as fotografias
         let img = document.createElement('img');
@@ -355,7 +355,7 @@ function displayNewsArticle(newsPiece){
         // Link para o perfil do autor
         let authorLink = document.createElement('a');
         authorLink.textContent = author.Name;
-        authorLink.onclick = function (e){
+        authorLink.onclick = function (e) {
             e.preventDefault();
 
             showUserProfile(author.ID);
@@ -379,11 +379,16 @@ function displayNewsArticle(newsPiece){
     pTime.textContent = newsPiece.Time;
     newsDate.appendChild(pTime);
 
-
+    // Separar a noticia do cabeçalho
+    let mobileSeparator = document.createElement('hr');
+    mobileSeparator.className = 'mobileSeparator';
+    mobileSeparator.style.display = 'none'; // Escondido por defeito. Será mostrado nos mobile devices
+    newsDetailHeaderContainer.appendChild(mobileSeparator);
 
     //#endregion Lado Esquerdo
 
     //#region Lado Direito
+
 
     // Descrição
     let pDescription = document.createElement('p');
@@ -397,7 +402,7 @@ function displayNewsArticle(newsPiece){
     newsDetailBodyContainer.appendChild(newsDetailBody);
 
     // O conteudo é um array
-    newsPiece.Content.forEach(function (content){
+    newsPiece.Content.forEach(function (content) {
 
         let p = document.createElement('p');
         p.textContent = content;
@@ -422,11 +427,11 @@ function displayNewsArticle(newsPiece){
 
     // Caso não exista comentários
     // Mostra uma mensagem 'No comments'
-    if (newsPiece.Comments[0] == null){
+    if (newsPiece.Comments[0] == null) {
 
         h2.textContent = 'No comments';
 
-    }else{
+    } else {
 
         h2.textContent = 'Comments';
 
@@ -487,7 +492,7 @@ function displayComments(comments, divID) {
             };
             p.appendChild(commentNameLink);
         }
-        
+
         // Data do comentario
         let pDate = document.createElement('p');
         pDate.className = 'commentHeaderDate';
@@ -519,21 +524,21 @@ function displayComments(comments, divID) {
                 showNewsArticle(comment.NewsID);
             };
             newsContextContainer.appendChild(newsLink);
-            
+
         }
 
     });
 
 }
 
-function showUserProfile(id){
-    
+function showUserProfile(id) {
+
     getUserProfile(id)
         .then(function (user) {
 
             displayUserProfile(user);
 
-        }).catch(function (error){
+        }).catch(function (error) {
 
             console.error(error);
             alert("We couldn't retrieve the author's profile...");
@@ -541,7 +546,7 @@ function showUserProfile(id){
         })
 }
 
-function displayUserProfile(user){
+function displayUserProfile(user) {
 
     initThisDivToShowContent(userProfile.className);
 
@@ -590,24 +595,24 @@ function displayUserProfile(user){
     userInfo.appendChild(hr_2);
 
     // 'div' que contem as noticias do autor
-    let userNews = document.createElement('div');
-    userNews.className = 'col-6 newsList'; // Bootsrap
-    userProfile.appendChild(userNews);
+    let newsList = document.createElement('div');
+    newsList.className = 'col-6 newsList'; // Bootsrap
+    userProfile.appendChild(newsList);
 
     // lbl Author of:
     let h2Author = document.createElement('h2');
     h2Author.className = 'bold';
     h2Author.textContent = 'Author of:';
-    userNews.appendChild(h2Author);
+    newsList.appendChild(h2Author);
 
     user.News.forEach(function (news) {
 
         let p = document.createElement('p');
-        userNews.appendChild(p);
+        newsList.appendChild(p);
 
         let linkNews = document.createElement('a');
         linkNews.className = '';
-        linkNews.textContent = ` - ${ news.Title }`;
+        linkNews.textContent = ` - ${news.Title}`;
         linkNews.onclick = function (e) {
             e.preventDefault();
 
@@ -617,19 +622,27 @@ function displayUserProfile(user){
 
     });
 
+    
+
     // 'div' que contem os comentários do autor
     let commentsContainer = document.createElement('div');
     commentsContainer.className = 'commentsListUserProfile col-6';
     commentsContainer.id = 'commentsListUserProfile';
     userProfile.appendChild(commentsContainer);
 
+    // Separa as noticias dos comentários nos telemoveis
+    let mobileSeparator = document.createElement('hr');
+    mobileSeparator.className = 'mobileSeparator';
+    mobileSeparator.style.display = 'none'; // Escondido por defeito. Será mostrado nos mobile devices
+    commentsContainer.appendChild(mobileSeparator);
+
     // lbl Comments
     let h2Comments = document.createElement('h2');
     h2Comments.textContent = 'Comments';
     commentsContainer.appendChild(h2Comments);
-
-    displayComments(user.Comments, commentsContainer.id);   
     
+    displayComments(user.Comments, commentsContainer.id);
+
 }
 
 //#region Utils
