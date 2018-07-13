@@ -22,8 +22,8 @@ function init() {
     // Com os 'div' que irão ser collapsed
     fillBodyContainer();
 
-    // Preenche o corpo 
-    showAllNews();
+    // Preenche o corpo com o default de noticias
+    showAllNews("All", 1);
 
 }
 
@@ -75,7 +75,7 @@ function fillHeaderContainer() {
     webpaperTitle.onclick = function (e) {
         e.preventDefault;
 
-        showAllNews();
+        showAllNews("All", 1);
 
     };
     title.appendChild(webpaperTitle);
@@ -120,7 +120,7 @@ function displayCategories(categories) {
     catLink.onclick = function (e) {
         e.preventDefault();
 
-        showAllNews();
+        showAllNews("All", 1);
 
     };
     $('.headerLinks').append(catLink);
@@ -134,7 +134,7 @@ function displayCategories(categories) {
         catLink.onclick = function (e) {
             e.preventDefault();
 
-            showCategoryNews(category.ID);
+            showAllNews(category.Name, 1);
 
         };
         $('.headerLinks').append(catLink);
@@ -159,9 +159,9 @@ function fillBodyContainer() {
 
 }
 
-function showAllNews() {
+function showAllNews(categoryName, pageNum) {
 
-    getNews()
+    getNews(categoryName, pageNum)
         .then(function (news) {
 
             displayNews(news);
@@ -170,21 +170,6 @@ function showAllNews() {
         .catch(function (error) {
 
             console.error(error);
-            alert("We couldn't retrieve the news articles...");
-
-        })
-}
-
-function showCategoryNews(category) {
-
-    getNewsCategory(category)
-        .then(function (news) {
-
-            displayNews(news);
-
-        }).catch(function (error) {
-
-            onsole.error(error);
             alert("We couldn't retrieve the news articles...");
 
         })
@@ -255,11 +240,11 @@ function displayNews(news) {
     if (!news.FirstPage) {
 
         let previousPageLink = document.createElement('a');
-        previousPageLink.textContent = 'Previous Page';
+        previousPageLink.textContent = '< Previous Page';
         previousPageLink.onclick = function (e) {
             e.preventDefault();
 
-            // TO-DO
+            showAllNews(news.Category, news.PageNum - 1);
         };
         previousPageLinkContainer.appendChild(previousPageLink);
 
@@ -270,11 +255,11 @@ function displayNews(news) {
     if (!news.LastPage) {
 
         let nextPageLink = document.createElement('a');
-        nextPageLink.textContent = 'Next Page';
+        nextPageLink.textContent = 'Next Page >';
         nextPageLink.onclick = function (e) {
             e.preventDefault();
 
-            // TO-DO
+            showAllNews(news.Category, news.PageNum + 1);
         };
         nextPageLinkContainer.appendChild(nextPageLink);
 
@@ -291,7 +276,7 @@ function showNewsArticle(id) {
         }).catch(function (error) {
 
             console.error(error);
-            alert("We couldn't retrieve the news articles...");
+            alert("We couldn't retrieve the news article...");
 
         })
 
@@ -352,7 +337,7 @@ function displayNewsArticle(newsPiece) {
     linkCategory.onclick = function (e) {
         e.preventDefault();
 
-        showCategoryNews(newsPiece.CategoryID);
+        showAllNews(newsPiece.Category, 1);
     };
     newsDetailHeaderCategoryContainer.appendChild(document.createElement('hr'));
     newsDetailHeaderCategoryContainer.appendChild(linkCategory);

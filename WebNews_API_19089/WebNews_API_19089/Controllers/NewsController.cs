@@ -22,44 +22,82 @@ namespace WebNews_API_19089.Controllers
 
         #region NewsList
 
-        
-        public IHttpActionResult GetNews()
+
+        [HttpGet, Route("Category/{categoryName}/Page/{pageNum}")]
+        public IHttpActionResult GetNewsPage(string categoryName, int pageNum)
         {
 
-            // Número de notícias por página
             const int newsPerPage = 6;
 
-            // Recolher as noticias da primeira página
-            var newsFirstPage = db.News.OrderByDescending(n => n.NewsDate).Take(newsPerPage).ToList();
+            // Calcula o valor a que deve fazer Skip()
+            // Case seja a pagina 1, dá 0
+            // Caso seja a pagina 2, dá 6 ... so on and so forth
+            int skipNum = (pageNum - 1) * newsPerPage;
 
-            // Descobre a última noticia de todas
-            // Aparentemente por causa de uma limitação por parte do SQL, não existe 'SELECT BOTTOM'
-            // O que significa que terei que inverter a ordem das noticias para ordem ascendente e agarrar
-            // a primeira. Desta forma estou na realidade a agarrar a última noticia -.-'
-            var lastNewsArticleID = db.News.OrderBy(n => n.NewsDate).First();
+            // Recolher todas as noticias
+            var newsAll = db.News.OrderByDescending(n => n.NewsDate).ToList();
 
-            // Caso a ultima noticia de todas se encontre na primeira página
-            bool lastPage = (newsFirstPage.Contains(lastNewsArticleID)) ? true : false;
+            // Irá conter a última e a primeira noticia (dependendo da existência de categoria)
+            // Relembro que 'All' não é uma categoria
+            News lastNewsQuery;
+            News firstNewsQuery;
 
-            // Utilizo um ViewModel para receber apenas os dados mostrados na página inicial
-            var newsOutput = newsFirstPage.Select(n => new NewsBlockViewModel
+            // Declarar o output das noticias
+            ICollection<NewsBlockViewModel> newsOutput;
+
+            // Não existe a categoria 'All'
+            // Então filtra as categoria quando se trata de uma verdadeira categoria
+            if (categoryName != "All")
             {
-                ID = n.ID,
-                Title = n.Title,
-                Description = n.Description
-            }).ToList();
 
-            // Retorno outro view model que contem um ICollection<NewsFrontPageViewModel>
-            // e uma string com a categoria
+                // Nesta situação existe uma categoria válida.
+                // Procura as noticias dessa categoria
+                newsOutput = newsAll.Where(n => n.Category.Name == categoryName).Skip(skipNum).Take(newsPerPage).Select(n => new NewsBlockViewModel
+                {
+                    ID = n.ID,
+                    Title = n.Title,
+                    Description = n.Description
+                }).ToList();
+                
+                // Descobre a primeira e ultima noticia da categoria
+                lastNewsQuery = db.News.Where(n => n.Category.Name == categoryName).OrderBy(n => n.NewsDate).First();
+                firstNewsQuery = db.News.Where(n => n.Category.Name == categoryName).OrderByDescending(n => n.NewsDate).First();
+            }
+            else
+            {
+
+                // Chegou 'All' como parametro para a categoria
+                // O que significa que deve retornar noticias de TODAS as categorias
+                newsOutput = newsAll.Skip(skipNum).Take(newsPerPage).Select(n => new NewsBlockViewModel
+                {
+                    ID = n.ID,
+                    Title = n.Title,
+                    Description = n.Description
+                }).ToList();
+
+                // Descobre a primeira e ultima noticia de TODAS
+                lastNewsQuery = db.News.OrderBy(n => n.NewsDate).First();
+                firstNewsQuery = db.News.OrderByDescending(n => n.NewsDate).First();
+            }
+
+            // Caso a ultima noticia de todas se encontre na página
+            // Sabe-se que é a última página
+            bool lastPage = (newsOutput.Where(n => n.ID == lastNewsQuery.ID).Count() > 0) ? true : false;
+
+            // Caso a primeira noticia de todas se encontre na página
+            // Sabe-se que é a primeira página
+            bool firstPage = (newsOutput.Where(n => n.ID == firstNewsQuery.ID).Count() > 0) ? true : false;
+
+
+
+            // Resposta --------------------------------------------------------------------------------------------------------------
             return Ok(new NewsOutputViewModel
             {
                 News = newsOutput,
-                Category = "All",
-                // Como este é o método geral de pedir noticias, será sempre a primeira página
-                PageNum = 1,
-                // Estes booleanos iram informar no Json se é necessário mostrar o butao para a proxima página
-                FirstPage = true,
-                LastPage = lastPage
+                Category = categoryName,
+                PageNum = pageNum,
+                LastPage = lastPage,
+                FirstPage = firstPage
             });
         }
 
@@ -147,7 +185,6 @@ namespace WebNews_API_19089.Controllers
                 Date = newsArticle.NewsDate.ToString("MM-dd-yyyy"),
                 Time = newsArticle.NewsDate.ToString("hh:mm:ss tt"),
                 Category = newsArticle.Category.Name,
-                CategoryID = newsArticle.Category.ID,
                 Photos = photos,
                 Authors = users,
                 Comments = comments
@@ -156,7 +193,6 @@ namespace WebNews_API_19089.Controllers
 
         }
         #endregion
-
         
     }
 }
