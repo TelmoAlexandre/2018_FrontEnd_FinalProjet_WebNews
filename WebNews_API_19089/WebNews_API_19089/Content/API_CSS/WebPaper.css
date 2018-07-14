@@ -274,6 +274,27 @@ a:hover {
   transition: .5s;
 }
 
+.newsCommentsContainer .commentNew {
+  padding: 2rem 0;
+}
+
+.newsCommentsContainer .commentNew .commentContent {
+  width: 60%;
+  height: 5rem;
+  background-color: #ededed;
+}
+
+.newsCommentsContainer .commentNew .commentSubmit input {
+  padding-left: 0;
+  font-weight: bold;
+}
+
+.newsCommentsContainer .commentNew .commentSubmit input:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
 .newsCommentsContainer .commentsList h2 {
   margin: 1.5rem 0 2rem;
   font-family: "Fondamento", cursive;

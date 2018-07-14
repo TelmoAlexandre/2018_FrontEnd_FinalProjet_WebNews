@@ -7,6 +7,8 @@ let userProfile = document.createElement('div');
 
 document.addEventListener("DOMContentLoaded", function main(e) {
     init();
+
+    
 });
 
 function init() {
@@ -201,8 +203,8 @@ function displayNews(news) {
     searchBox.type = 'text';
     searchBox.onchange = function (e) {
         e.preventDefault();
-        
-        processSearch(news.Category ,this.value);
+
+        processSearch(news.Category, this.value);
     };
     searchInputContainer.appendChild(searchBox);
 
@@ -491,9 +493,52 @@ function displayNewsArticle(newsPiece) {
 
     //#region CommentsList
 
+    // Container para o formulário do novo comentário
+    let addCommentContainer = document.createElement('div');
+    addCommentContainer.className = 'commentNew';
+    newsCommentsContainer.appendChild(addCommentContainer);
+
+    // lbl
+    let h2NewComment = document.createElement('h2');
+    h2NewComment.textContent = 'Add a comment';
+    addCommentContainer.appendChild(h2NewComment);
+
+    // Formulário para o novo comentário
+    let newCommentForm = document.createElement('form');
+    newCommentForm.id = 'formAddComment';
+    addCommentContainer.appendChild(newCommentForm);
+
+    // Input escondido com o ID da noticia
+    let formNewsIDInput = document.createElement('input');
+    formNewsIDInput.type = 'hidden';
+    formNewsIDInput.name = 'NewsFK';
+    formNewsIDInput.value = newsPiece.ID;
+    newCommentForm.appendChild(formNewsIDInput);
+
+    let formCommentTextArea = document.createElement('textarea');
+    formCommentTextArea.className = 'commentContent'
+    formCommentTextArea.cols = '20';
+    formCommentTextArea.name = 'Content';
+    formCommentTextArea.placeholder = 'Write you comment...';
+    formCommentTextArea.rows = '2';
+    formCommentTextArea.id = 'formCommentTextArea';
+    newCommentForm.appendChild(formCommentTextArea);
+
+    let formCommentSubmitContainer = document.createElement('div');
+    formCommentSubmitContainer.className = 'commentSubmit';
+    newCommentForm.appendChild(formCommentSubmitContainer);
+
+    let formCommentSubmit = document.createElement('input');
+    formCommentSubmit.type = 'submit';
+    formCommentSubmit.value = 'Submit';
+    formCommentSubmit.className = 'btn';
+    formCommentSubmitContainer.appendChild(formCommentSubmit);
+
+
     // 'div' dos comentários
     let commentsList = document.createElement('div');
     commentsList.className = 'commentsList';
+    commentsList.id = 'commentsList';
     newsCommentsContainer.appendChild(commentsList);
 
 
@@ -516,7 +561,57 @@ function displayNewsArticle(newsPiece) {
 
 
     //#endregion
+
+
+    document.querySelector('#formAddComment').addEventListener('submit', function (e) {
+
+        e.preventDefault();
+
+        let form = this;
+
+        let comment = {
+            NewsFK: form.querySelector('[name=NewsFK]').value,
+            Content: form.querySelector('[name=Content]').value
+        };
+
+        let jsonComment = JSON.stringify(comment);
+
+        fetch('/api/Comments', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: jsonComment
+        })
+            .then(resposta => { // Resposta da criação
+                if (resposta.ok) { // "ok" indica se 200 <= status < 300.
+                    return resposta.json(); // JSON do Agente criado.
+                } else {
+                    // Erro (vai parar ao catch abaixo)
+                    return resposta.json()
+                        .then(erro => Promise.reject(erro));
+                }
+            })
+            .then(newComment => {
+
+
+                // Criar um div e coloca-lo como primeiro nos cometários
+                // Para o novo comentário poder aparecer em cima
+                let divComment = document.createElement('div');
+                divComment.id = `newComment${newComment.ID}`
+                let commentsContainer = document.getElementById('commentsList');
+                commentsContainer.insertBefore(divComment, commentsContainer.childNodes[1]);
+
+
+                return displaySingleComment(newComment, divComment.id);
+            })
+            .catch(erro => {
+                console.error(erro);
+            });
+
+    });
+
 }
+
+
 
 /**
  * 
@@ -533,78 +628,84 @@ function displayComments(comments, divID) {
 
     comments.forEach(function (comment) {
 
-        // 'div' do comentário inteiro
-        let commentContainer = document.createElement('div');
-        commentContainer.className = 'comment';
-        $(`#${divID}`).append(commentContainer);
-
-        // Contem o link do nome do utilizador e a data
-        let commentHeaderContainer = document.createElement('div');
-        commentHeaderContainer.className = 'commentHeaderContainer';
-        commentContainer.appendChild(commentHeaderContainer);
-
-        // Paragrafo que ira conter o link com o nome do utilizador
-        let p = document.createElement('p');
-        p.className = 'commentHeaderUser';
-
-        // Saber se e necessario criar link para a pagina do autor
-        // o link so sera necessario se nos os comments estiverem na pagina NewsArticle
-        //
-        // A alternativa, sera que os comments se encontram no perfil
-        // do utilizador, o que nesse caso nao e necessario o link para o perfil
-        p.textContent = (newsArticle) ? 'by ' : `by ${comment.User}`;
-        commentHeaderContainer.appendChild(p);
-
-        // Link para o perfil do utilizador, caso nos encontremos na page NewsArticle
-        if (newsArticle) {
-            // Link com o nome do utilizador
-            let commentNameLink = document.createElement('a');
-            commentNameLink.textContent = comment.User;
-            commentNameLink.onclick = function (e) {
-                e.preventDefault;
-
-                showUserProfile(comment.UserID);
-            };
-            p.appendChild(commentNameLink);
-        }
-
-        // Data do comentario
-        let pDate = document.createElement('p');
-        pDate.className = 'commentHeaderDate';
-        pDate.textContent = comment.Date;
-        commentHeaderContainer.appendChild(pDate);
-
-        // Corpo do comentario
-        let commentBodyContainer = document.createElement('div');
-        commentBodyContainer.className = 'commentBodyContainer';
-        commentBodyContainer.textContent = comment.Content;
-        commentContainer.appendChild(commentBodyContainer);
-
-        // Caso os comments estejam a ser escritos no perfil do utilizador
-        // criar um link para a noticia onde o comentario se encontra
-        if (!newsArticle) {
-
-            // div que ira conter o link para a noticia do comentario
-            let newsContextContainer = document.createElement('div');
-            newsContextContainer.className = 'newsContext';
-            commentContainer.appendChild(newsContextContainer);
-
-            // Link para a noticia
-            let newsLink = document.createElement('a');
-            newsLink.className = 'bold';
-            newsLink.textContent = 'News Context';
-            newsLink.onclick = function (e) {
-                e.preventDefault();
-
-                showNewsArticle(comment.NewsID);
-            };
-            newsContextContainer.appendChild(newsLink);
-
-        }
+        displaySingleComment(comment, divID)
 
     });
 
 }
+
+function displaySingleComment(comment, divID) {
+
+    // 'div' do comentário inteiro
+    let commentContainer = document.createElement('div');
+    commentContainer.className = 'comment';
+    $(`#${divID}`).append(commentContainer);
+
+    // Contem o link do nome do utilizador e a data
+    let commentHeaderContainer = document.createElement('div');
+    commentHeaderContainer.className = 'commentHeaderContainer';
+    commentContainer.appendChild(commentHeaderContainer);
+
+    // Paragrafo que ira conter o link com o nome do utilizador
+    let p = document.createElement('p');
+    p.className = 'commentHeaderUser';
+
+    // Saber se e necessario criar link para a pagina do autor
+    // o link so sera necessario se nos os comments estiverem na pagina NewsArticle
+    //
+    // A alternativa, sera que os comments se encontram no perfil
+    // do utilizador, o que nesse caso nao e necessario o link para o perfil
+    p.textContent = (newsArticle) ? 'by ' : `by ${comment.User}`;
+    commentHeaderContainer.appendChild(p);
+
+    // Link para o perfil do utilizador, caso nos encontremos na page NewsArticle
+    if (newsArticle) {
+        // Link com o nome do utilizador
+        let commentNameLink = document.createElement('a');
+        commentNameLink.textContent = comment.User;
+        commentNameLink.onclick = function (e) {
+            e.preventDefault;
+
+            showUserProfile(comment.UserID);
+        };
+        p.appendChild(commentNameLink);
+    }
+
+    // Data do comentario
+    let pDate = document.createElement('p');
+    pDate.className = 'commentHeaderDate';
+    pDate.textContent = comment.Date;
+    commentHeaderContainer.appendChild(pDate);
+
+    // Corpo do comentario
+    let commentBodyContainer = document.createElement('div');
+    commentBodyContainer.className = 'commentBodyContainer';
+    commentBodyContainer.textContent = comment.Content;
+    commentContainer.appendChild(commentBodyContainer);
+
+    // Caso os comments estejam a ser escritos no perfil do utilizador
+    // criar um link para a noticia onde o comentario se encontra
+    if (!newsArticle) {
+
+        // div que ira conter o link para a noticia do comentario
+        let newsContextContainer = document.createElement('div');
+        newsContextContainer.className = 'newsContext';
+        commentContainer.appendChild(newsContextContainer);
+
+        // Link para a noticia
+        let newsLink = document.createElement('a');
+        newsLink.className = 'bold';
+        newsLink.textContent = 'News Context';
+        newsLink.onclick = function (e) {
+            e.preventDefault();
+
+            showNewsArticle(comment.NewsID);
+        };
+        newsContextContainer.appendChild(newsLink);
+
+    }
+}
+
 
 function showUserProfile(id) {
 
@@ -697,7 +798,7 @@ function displayUserProfile(user) {
 
     });
 
-    
+
 
     // 'div' que contem os comentários do autor
     let commentsContainer = document.createElement('div');
@@ -715,7 +816,7 @@ function displayUserProfile(user) {
     let h2Comments = document.createElement('h2');
     h2Comments.textContent = 'Comments';
     commentsContainer.appendChild(h2Comments);
-    
+
     displayComments(user.Comments, commentsContainer.id);
 
 }

@@ -31,5 +31,14 @@ namespace WebNews_API_19089.Controllers
             return Ok(categories);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
     }
 }

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WebNews_API_19089.Models;
+using System.Data.Entity;
 
 namespace WebNews_API_19089.Controllers
 {
@@ -56,5 +57,14 @@ namespace WebNews_API_19089.Controllers
         }
 
         #endregion
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

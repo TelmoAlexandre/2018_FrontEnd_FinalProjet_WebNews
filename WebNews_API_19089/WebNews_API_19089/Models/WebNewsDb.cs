@@ -23,5 +23,12 @@ namespace WebNews_API_19089.Models
         public virtual DbSet<UsersProfile> UsersProfile { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
 
+        public int GetIdCommente()
+        {
+            return this.Database
+                .SqlQuery<int>("Select Next Value For [dbo].[SeqIdComments]")
+                .Single();
+        }
+
     }
 }

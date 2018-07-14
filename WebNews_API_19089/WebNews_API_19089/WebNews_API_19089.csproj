@@ -190,6 +190,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
@@ -202,8 +203,10 @@
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\Photos.cs" />
     <Compile Include="Models\UsersProfile.cs" />
+    <Compile Include="Models\ViewModels\GetCommentViewModel.cs" />
     <Compile Include="Models\ViewModels\NewsBlockViewModel.cs" />
     <Compile Include="Models\ViewModels\NewsOutputViewModel.cs" />
+    <Compile Include="Models\ViewModels\PostCommentViewModel.cs" />
     <Compile Include="Models\WebNewsDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
