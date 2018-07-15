@@ -354,6 +354,7 @@ function displayNewsArticle(newsPiece) {
     // Parte da esquerda da noticia
     let newsDetailHeaderContainer = document.createElement('div');
     newsDetailHeaderContainer.className = 'col-6 newsDetailHeaderContainer';
+    newsDetailHeaderContainer.id = 'newsDetailHeaderContainer';
     newsDetail.appendChild(newsDetailHeaderContainer);
 
     // Parte da direita da noticia
@@ -397,14 +398,7 @@ function displayNewsArticle(newsPiece) {
     newsDetailHeaderContainer.appendChild(newsDetailHeaderImagesContainer);
 
     // Mostrar as fotografias
-    newsPiece.Photos.forEach(function (photo) {
-
-        // 'img' para as fotografias
-        let img = document.createElement('img');
-        img.src = `/Images/${photo.Name}`
-        newsDetailHeaderContainer.appendChild(img);
-
-    });
+    createCarousel(newsPiece.Photos, newsDetailHeaderContainer.id);
 
     // Info das noticias
     let newsInfo = document.createElement('div');
@@ -905,6 +899,100 @@ function initThisDivToShowContent(divClass) {
 
     scrollToTop(); // Faz scroll até ao topo (Utilidades)
 
+}
+
+/**
+ * 
+ * Cria um carousel para mostrar as imagens das noticias
+ * 
+ * @param {any} photos Colecçãop de fotos
+ * @param {any} divID o id do container para o carousel ser inserido
+ */
+function createCarousel(photos, divID) {
+
+    let carouselContainer = document.createElement('div');
+    carouselContainer.className = 'carousel slide';
+    carouselContainer.id = 'carouselExampleIndicators';
+    carouselContainer.setAttribute('data-ride', 'carousel');
+    $(`#${divID}`).append(carouselContainer);
+
+    // Lista dos indicadores
+    let ulCarouselIndicatersList = document.createElement('ol');
+    ulCarouselIndicatersList.className = 'carousel-indicators';
+    carouselContainer.appendChild(ulCarouselIndicatersList);
+
+    // Container das imagens
+    let carouselInnerContainer = document.createElement('div');
+    carouselInnerContainer.className = 'carousel-inner';
+    carouselContainer.appendChild(carouselInnerContainer);
+
+    // Criar os indicadores
+    let i = 0;
+    photos.forEach(function (photo) {
+
+        // li para cada indicador
+        let liIndicators = document.createElement('li');
+        liIndicators.setAttribute('data-target', '#carouselExampleIndicators');
+        liIndicators.setAttribute('data-slide-to', i);
+        ulCarouselIndicatersList.appendChild(liIndicators);
+        
+        let carouselItemContainer = document.createElement('div');
+        carouselItemContainer.className = 'carousel-item';
+        carouselInnerContainer.appendChild(carouselItemContainer);
+
+        let carouselImg = document.createElement('img');
+        carouselImg.className = 'd-block w-100';
+        carouselImg.alt = '';
+        carouselImg.src = `/Images/${photo.Name}`
+        carouselItemContainer.appendChild(carouselImg);
+
+        // Definir a classes activas
+        if (i == 0) {
+
+            liIndicators.className = 'active';
+            carouselItemContainer.className = 'carousel-item active';
+
+        } 
+
+        i++;
+    });
+
+    // Botão anterior
+    let aPrevious = document.createElement('a');
+    aPrevious.className = 'carousel-control-prev';
+    aPrevious.href = '#carouselExampleIndicators';
+    aPrevious.setAttribute('role', 'button');
+    aPrevious.setAttribute('data-slide', 'prev');
+    carouselContainer.appendChild(aPrevious);
+
+    let spanPrevIcon = document.createElement('span');
+    spanPrevIcon.className = 'carousel-control-prev-icon';
+    spanPrevIcon.setAttribute('aria-hidden', 'true');
+    aPrevious.appendChild(spanPrevIcon);
+
+    let spanPrevious = document.createElement('span');
+    spanPrevious.className = 'sr-only';
+    spanPrevious.textContent = 'Previous';
+    aPrevious.appendChild(spanPrevious);
+
+    // Botão próximo
+    let aNext = document.createElement('a');
+    aNext.className = 'carousel-control-next';
+    aNext.href = '#carouselExampleIndicators';
+    aNext.setAttribute('role', 'button');
+    aNext.setAttribute('data-slide','next');
+    carouselContainer.appendChild(aNext);
+
+    let spanNextIcon = document.createElement('span');
+    spanNextIcon.className = 'carousel-control-next-icon';
+    spanNextIcon.setAttribute('aria-hidden', 'true');
+    aNext.appendChild(spanNextIcon);
+
+    let spanNext = document.createElement('span');
+    spanNext.className = 'sr-only';
+    spanNext.textContent = 'Next';
+    aNext.appendChild(spanNext);
+    
 }
 
 //#endregion
