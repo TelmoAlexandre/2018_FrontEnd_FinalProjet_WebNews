@@ -63,3 +63,16 @@ function getUserProfile(id){
             }
         });
 }
+
+function getUsersProfile() {
+    return fetch(`/api/UserProfile`, { headers: { Accept: 'application/json' } })
+        .then(function (reponse) {
+            if (reponse.status === 200) {
+
+                return reponse.json();
+
+            } else {
+                return Promise.reject(new Error(reponse.statusText));
+            }
+        });
+}

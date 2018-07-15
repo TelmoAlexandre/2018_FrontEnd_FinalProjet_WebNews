@@ -21,6 +21,9 @@ namespace WebNews_API_19089.Controllers
 
         #endregion
 
+
+        #region POST Comment
+
         public IHttpActionResult PostComment(PostCommentViewModel model)
         {
 
@@ -37,7 +40,7 @@ namespace WebNews_API_19089.Controllers
                 // As dependências da minha base de dados requeriam que fosse 
                 // criado um utilizador por comment. Para evitar isso, vou atribui
                 // os novos comments ao utilizador 1
-                UserProfileFK = 1,
+                UserProfileFK = model.UserProfileID,
                 Content = model.Content,
             };
 
@@ -49,19 +52,14 @@ namespace WebNews_API_19089.Controllers
             }
             catch (DbUpdateException)
             {
-                //Conflict (HTTP 409).
-                if (CommentExists(comment.ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                 return Conflict();
             }
 
+            // Recolhe o comment que foi gravado
             comment = db.Comments.OrderByDescending(c => c.CommentDate).First();
-            UsersProfile user = db.UsersProfile.Find(1);
+
+            // Porque ainda o utilizador ainda não está associado no Comment.UserProfile
+            UsersProfile user = db.UsersProfile.Find(model.UserProfileID);
 
             GetCommentViewModel response = new GetCommentViewModel
             {
@@ -75,6 +73,8 @@ namespace WebNews_API_19089.Controllers
             return CreatedAtRoute("DefaultApi", new { id = comment.ID }, response);
         }
 
+        #endregion
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -82,13 +82,6 @@ namespace WebNews_API_19089.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        // Função criada pelo template que verifica se já
-        // existe um agente com um determinado ID.
-        private bool CommentExists(int id)
-        {
-            return db.Comments.Count(e => e.ID == id) > 0;
         }
 
     }

@@ -13,5 +13,7 @@ namespace WebNews_API_19089.Models.ViewModels
         public string Content { get; set; }
 
         public int NewsFK { get; set; }
+
+        public int UserProfileID { get; set; }
     }
 }

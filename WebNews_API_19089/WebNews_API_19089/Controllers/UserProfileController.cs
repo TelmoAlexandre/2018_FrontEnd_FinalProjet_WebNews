@@ -20,6 +20,24 @@ namespace WebNews_API_19089.Controllers
         #endregion
 
         #region GetUserProfile
+
+
+        public IHttpActionResult GetUserProfile()
+        {
+
+            // Recolher os utilizadores
+            var users = db.UsersProfile.Select(u => new
+            {
+                u.ID,
+                u.Name
+            }).ToList();
+
+            return Ok(new
+            {
+                UserProfile = users
+            });
+        }
+
         [HttpGet, Route("{id}")]
         public IHttpActionResult GetUserProfile(int id)
         {

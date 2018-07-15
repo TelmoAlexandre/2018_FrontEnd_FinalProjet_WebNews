@@ -515,6 +515,40 @@ function displayNewsArticle(newsPiece) {
     formNewsIDInput.value = newsPiece.ID;
     newCommentForm.appendChild(formNewsIDInput);
 
+    // Div para a dropdown dos utilizadores
+    let dropDownUserNameContainer = document.createElement('div');
+    dropDownUserNameContainer.className = 'dropDownUserNameContainer';
+    newCommentForm.appendChild(dropDownUserNameContainer);
+
+    // Dropdown com o nome dos utilizadores
+    // para ser escolhido quem comenta
+    let dropDownUserName = document.createElement('select');
+    dropDownUserName.className = 'dropDownUserName';
+    dropDownUserName.name = 'UserProfileID';
+    dropDownUserNameContainer.appendChild(dropDownUserName);
+
+    // Traz todos os utilizadores
+    getUsersProfile()
+        .then(function (users) {
+            
+            users.UserProfile.forEach(function (user) {
+
+                // Opções para cada userProfile
+                let userOption = document.createElement('option');
+                userOption.value = user.ID;
+                userOption.textContent = user.Name;
+                dropDownUserName.appendChild(userOption);
+
+            });
+            
+        })
+        .catch(function (error)
+        {
+            console.error(error);
+            alert("We couldn't retrieve the author's profile...");
+        });
+
+    // Text area para o content do comment
     let formCommentTextArea = document.createElement('textarea');
     formCommentTextArea.className = 'commentContent'
     formCommentTextArea.cols = '20';
@@ -524,10 +558,12 @@ function displayNewsArticle(newsPiece) {
     formCommentTextArea.id = 'formCommentTextArea';
     newCommentForm.appendChild(formCommentTextArea);
 
+    // Div para o butao submit
     let formCommentSubmitContainer = document.createElement('div');
     formCommentSubmitContainer.className = 'commentSubmit';
     newCommentForm.appendChild(formCommentSubmitContainer);
 
+    // Botao submit
     let formCommentSubmit = document.createElement('input');
     formCommentSubmit.type = 'submit';
     formCommentSubmit.value = 'Submit';
@@ -562,7 +598,7 @@ function displayNewsArticle(newsPiece) {
 
     //#endregion
 
-
+    // Submit POST Comment
     document.querySelector('#formAddComment').addEventListener('submit', function (e) {
 
         e.preventDefault();
@@ -571,7 +607,8 @@ function displayNewsArticle(newsPiece) {
 
         let comment = {
             NewsFK: form.querySelector('[name=NewsFK]').value,
-            Content: form.querySelector('[name=Content]').value
+            Content: form.querySelector('[name=Content]').value,
+            UserProfileID: form.querySelector('[name=UserProfileID]').value
         };
 
         let jsonComment = JSON.stringify(comment);

@@ -278,6 +278,14 @@ a:hover {
   padding: 2rem 0;
 }
 
+.newsCommentsContainer .commentNew .dropDownUserNameContainer {
+  padding: 1rem 0 2rem;
+}
+
+.newsCommentsContainer .commentNew .dropDownUserNameContainer select {
+  background-color: #ededed;
+}
+
 .newsCommentsContainer .commentNew .commentContent {
   width: 60%;
   height: 5rem;
