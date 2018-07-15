@@ -576,24 +576,13 @@ function displayNewsArticle(newsPiece) {
     commentsList.className = 'commentsList';
     commentsList.id = 'commentsList';
     newsCommentsContainer.appendChild(commentsList);
-
-
+    
     let h2 = document.createElement('h2');
+    h2.textContent = 'Comments';
     commentsList.appendChild(h2);
 
-    // Caso não exista comentários
-    // Mostra uma mensagem 'No comments'
-    if (newsPiece.Comments[0] == null) {
-
-        h2.textContent = 'No comments';
-
-    } else {
-
-        h2.textContent = 'Comments';
-
-        displayComments(newsPiece.Comments, newsCommentsContainer.id);
-
-    }
+    // Caso exista comentários
+    if (newsPiece.Comments[0] != null) displayComments(newsPiece.Comments, newsCommentsContainer.id);
 
 
     //#endregion
@@ -613,31 +602,17 @@ function displayNewsArticle(newsPiece) {
 
         let jsonComment = JSON.stringify(comment);
 
-        fetch('/api/Comments', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: jsonComment
-        })
-            .then(resposta => { // Resposta da criação
-                if (resposta.ok) { // "ok" indica se 200 <= status < 300.
-                    return resposta.json(); // JSON do Agente criado.
-                } else {
-                    // Erro (vai parar ao catch abaixo)
-                    return resposta.json()
-                        .then(erro => Promise.reject(erro));
-                }
-            })
+        // Chama função que contém a promise com o POST
+        postComment(jsonComment)
             .then(newComment => {
-
-
+                
                 // Criar um div e coloca-lo como primeiro nos cometários
                 // Para o novo comentário poder aparecer em cima
                 let divComment = document.createElement('div');
                 divComment.id = `newComment${newComment.ID}`
                 let commentsContainer = document.getElementById('commentsList');
                 commentsContainer.insertBefore(divComment, commentsContainer.childNodes[1]);
-
-
+                
                 return displaySingleComment(newComment, divComment.id);
             })
             .catch(erro => {
