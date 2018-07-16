@@ -152,7 +152,7 @@
                 },
                 new News {
                     ID=10,
-                    Title="Fetch rover! Robot to retrieve Mars rocks",
+                    Title="Mars rover: Robot to retrieve Mars rocks",
                     Description="UK engineers will design a robot that can retrieve rock samples on Mars so they can be sent to Earth for study.",
                     Content="The European Space Agency is issuing contracts to industry to spec the technology needed for what will be a complex joint undertaking with the US. Aerospace giant Airbus will scope the concept for a surface \"fetch rover\" at its Stevenage centre north of London. <br/><br/>Esa and the American space agency (Nasa) expect to send the sample-return equipment to the Red Planet in 2026. \"It will be a relatively small rover - about 130kg; but the requirements are very demanding,\" said Ben Boyes who will lead the feasibility team at Airbus. \"The vehicle will have to cover large distances using a high degree of autonomy, planning its own path ahead day after day,\" he told BBC News. Esa and Nasa signed a letter of intent in April committing themselves to bringing back pieces of Martian rock and soil to Earth before the end of the next decade. It will be a daring venture that will be done in stages and take several years to complete. <br/><br/>Why does this matter? Numerous satellites have been sent to study Mars from above, and seven landers have so far touched down to sift its surface materials. But scientists say some of the biggest questions about the planet - such as whether it has ever hosted life - can only really be answered if rock and soil is brought to Earth. No amount of miniaturisation can give Martian landers the capabilities of the most modern analytical tools now available in research laboratories. Mars Sample Return is the next big thing in planetary science.",
                     NewsDate= new DateTime(2018,06,07,18,0,0),
@@ -226,7 +226,7 @@
                     ID=18,
                     Title="The world's first family to live in a 3D-printed home",
                     Description="A family in France has become the first in the world to move into a 3D-printed house. The four-bedroom property is a prototype for bigger projects aiming to make housebuilding quicker and cheaper. Could it cause a shift in the building industry?",
-                    Content="With curved walls designed to reduce the effects of humidity and digital controls for disabled people, this house could be an expensive realisation of an architect's vision. But having taken 54 hours to print - with four more months for contractors to add in things such as windows, doors and the roof - its cost of around £176,000 to build makes it 20% cheaper than an identical construction using more traditional solutions. The team now believe they could print the same house again in only 33 hours. The 95m (1022ft) square house - built for a family of five with four bedrooms and a big central space in Nantes - is a collaboration between the city council, a housing association and University of Nantes. <br/><br/>Francky Trichet, the council's lead on technology and innovation, says the purpose of the project was to see whether this type of construction could become mainstream for housing, and whether its principles could be applied to other communal buildings, such as sports halls. He believes the process will disrupt the construction industry. \"For 2,000 years there hasn't been a change in the paradigm of the construction process. We wanted to sweep this whole construction process away,\" he says. \"That's why I'm saying that we're at the start of a story. We've just written, 'Once upon a time'.\" <br/><br/>Now, he says, their work will \"force\" private companies to \"take the pen\" and continue the narrative. The house has been built in a deprived neighbourhood in the north of the town and was partly funded by the council. Nordine and Nouria Ramdani, along with their three children, were the lucky ones chosen to live there. <br/><br/>\"It's a big honour to be a part of this project,\" says Nordine. \"We lived in a block of council flats from the 60s, so it's a big change for us. \"It's really something amazing to be able to live in a place where there is a garden, and to have a detached house.\" <br/><br/>The house is designed in a studio by a team of architects and scientists, then programmed into a 3D printer. The printer is then brought to the site of the home. It works by printing in layers from the floor upwards. Each wall consists of two layers of the insulator polyurethane, with a space in-between which is filled with cement. <br/><br/>This creates a thick, insulated, fully-durable wall. The windows, doors, and roof are then fitted. And, voila, you have a home. The house was the brainchild of Benoit Furet, who heads up the project at University of Nantes. He thinks that in five years they will reduce the cost of the construction of such houses by 25% while adhering to building regulations, and by 40% in 10 to 15 years. This is partly because of the technology becoming more refined and cheaper to develop and partly because of economies of scale as more houses are built. Printing, he adds, also allows architects to be far more creative with the shapes of the houses they are building. For example, the house in Nantes was built to curve around the 100-year-old protected trees on the plot.",
+                    Content="With curved walls designed to reduce the effects of humidity and digital controls for disabled people, this house could be an expensive realisation of an architect's vision. But having taken 54 hours to print - with four more months for contractors to add in things such as windows, doors and the roof - its cost of around £176,000 to build makes it 20% cheaper than an identical construction using more traditional solutions. The team now believe they could print the same house again in only 33 hours. The 95m (1022ft) square house - built for a family of five with four bedrooms and a big central space in Nantes - is a collaboration between the city council, a housing association and University of Nantes. <br/><br/>Francky Trichet, the council's lead on technology and innovation, says the purpose of the project was to see whether this type of construction could become mainstream for housing, and whether its principles could be applied to other communal buildings, such as sports halls. He believes the process will disrupt the construction industry. \"For 2,000 years there hasn't been a change in the paradigm of the construction process. We wanted to sweep this whole construction process away,\" he says. \"That's why I'm saying that we're at the start of a story. We've just written, 'Once upon a time'.\" <br/><br/>Now, he says, their work will \"force\" private companies to \"take the pen\" and continue the narrative. The house has been built in a deprived neighbourhood in the north of the town and was partly funded by the council. Nordine and Nouria Ramdani, along with their three children, were the lucky ones chosen to live there. <br/><br/>\"It's a big honour to be a part of this project,\" says Nordine. \"We lived in a block of council flats from the 60s, so it's a big change for us.",
                     NewsDate= new DateTime(2018,06,04,21,11,0),
                     CategoryFK=3,
                     UsersProfileList = new List<UsersProfile> { user[2], user[1] }
@@ -257,6 +257,33 @@
                     NewsDate= new DateTime(2018,06,15,12,34,0),
                     CategoryFK=1,
                     UsersProfileList = new List<UsersProfile> { user[2], user[1]}
+                },
+                new News {
+                    ID=22,
+                    Title="Scotland: Sutherland about to host first UK spaceport",
+                    Description="A remote, boggy stretch of land on the north coast of Scotland is likely to become the UK's first spaceport.",
+                    Content="The A'Mhoine Peninsula in Sutherland has been chosen as the most suitable place from which to launch rockets vertically to put satellites in orbit. The UK Space Agency is giving Highlands and Islands Enterprise £2.5m towards the development of the facility. <br/><br/>HIE will work closely with operators. The American aerospace giant Lockheed Martin wants to be one of the partners. The goal would be to have launches as early as possible in the 2020s. \"The decision to support the UK's first spaceport in Sutherland is tremendous news for our region and for Scotland as a whole,\" said HIE's chief executive Charlotte Wright. <br/><br/>\"The international space sector is growing and we want to ensure the region is ready to reap the economic benefits that will be generated from this fantastic opportunity.\" Lockheed has made no secret of its desire to bring the Electron rocket to Scotland. Currently, this vehicle flies out of New Zealand. <br/><br/>A British version of the rocket would have an upper-stage developed and built at LM's UK HQ in Ampthill, Bedfordshire.",
+                    NewsDate= new DateTime(2018,07,16,10,19,0),
+                    CategoryFK=2,
+                    UsersProfileList = new List<UsersProfile> { user[0], user[1]}
+                },
+                new News {
+                    ID=23,
+                    Title="Iceland is accused of slaughtering rare whale",
+                    Description="Whalers in Iceland have killed what appears to be a blue whale, one of the largest creatures left on the planet.",
+                    Content="Photographic evidence from campaigners opposed to whaling show a large animal being butchered for export. <br/><br/>Several experts have concluded from these pictures that it's a juvenile male blue, a species that hasn't been deliberately killed since 1978. <br/><br/>The whaling company involved say they are confident that the animal is a hybrid between a blue and fin whale. DNA testing will be needed to confirm the whale's true identity. The key reason for interest in the species is to determine whether this killing is legal or not under Icelandic law. <br/><br/>Weighing as much as 200 tonnes and stretching up to 30 metres, blue whales were hunted to the brink by commercial whalers from many countries including the UK from the 1940s to the 1960s when they became a protected stock under the International Whaling Commission. That means that all countries, including Iceland agreed not to kill the creatures. <br/><br/>It's different for fin whales. While there is an international moratorium on killing all whales, Iceland doesn't agree that fin whales are threatened and gives permits for their hunting. Hybrids between fin and blue whales are a grey area, say specialists. A hybrid allows the whalers to say they simply made a mistake.",
+                    NewsDate= new DateTime(2018,07,11,10,19,0),
+                    CategoryFK=2,
+                    UsersProfileList = new List<UsersProfile> { user[0], user[2]}
+                },
+                new News {
+                    ID=24,
+                    Title="Killing rats could save coral reefs",
+                    Description="The much maligned rat is not a creature many would associate with coral reefs.",
+                    Content="But scientists studying reefs on tropical islands say the animals directly threaten the survival of these ecosystems. A team working on the Chagos Islands in the Indian Ocean found that invasive rats on the islands are a \"big problem\" for coral reefs. <br/><br/>Rats decimate seabird populations, in turn decimating the volume of bird droppings - a natural reef fertiliser. The Chagos Archipelago provided a large-scale natural laboratory to answer this question; although the islands are uninhabited by humans, some of them are now home to invasive rats, brought by ships and shipwrecks. Other islands have remained rat-free. By killing seabirds, this study revealed, rats disrupt a healthy ecosystem that depends on the seabird droppings, which fertilise the reefs surrounding the island. <br/><br/>On rat-free islands, seabirds including boobies, frigatebirds, noddies, shearwaters and terns travel hundreds of kilometres to feed out in the ocean. When they return to the island, they deposit rich nutrients from the fish they feed on. e and his team were able to track the source of those nutrients back to the fish that seabirds fed on by analysing algae and sponges growing on the reef.",
+                    NewsDate= new DateTime(2018,07,9,9,19,0),
+                    CategoryFK=2,
+                    UsersProfileList = new List<UsersProfile> { user[1], user[2]}
                 }
             };
             news.ForEach(aa => context.News.AddOrUpdate(a => a.Title, aa));
@@ -288,18 +315,207 @@
                     UserProfileFK=3
                 },
                 new Comments {
-                    ID=2,
+                    ID=4,
                     Content="Nulla nec lectus sagittis, congue dui a, bibendum nunc. Nullam porta, lacus vel imperdiet rhoncus, felis orci aliquet urna, id condimentum leo nibh quis nisi.",
                     CommentDate=new DateTime(2018,05,07),
                     NewsFK=4,
                     UserProfileFK=2
                 },
                 new Comments {
-                    ID=1,
+                    ID=5,
                     Content="Nunc a arcu sapien. Sed convallis dignissim ligula eu dignissim. Sed et odio vel odio semper efficitur. Nulla finibus, erat non ornare tincidunt, augue nulla feugiat ante, eget ultrices diam nibh sit amet arcu. Morbi fringilla porttitor tincidunt.",
                     CommentDate=new DateTime(2018,05,08),
                     NewsFK=4,
                     UserProfileFK=3
+                },
+                new Comments {
+                    ID=6,
+                    Content="Morbi vitae ligula auctor, vehicula felis in, mattis erat.",
+                    CommentDate=new DateTime(2018,07,16),
+                    NewsFK=24,
+                    UserProfileFK=2
+                },
+                new Comments {
+                    ID=7,
+                    Content="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    CommentDate=new DateTime(2018,07,16),
+                    NewsFK=24,
+                    UserProfileFK=3
+                },
+                new Comments {
+                    ID=8,
+                    Content="Vestibulum molestie tellus ac leo malesuada scelerisque.",
+                    CommentDate=new DateTime(2018,07,16),
+                    NewsFK=23,
+                    UserProfileFK=1
+                },
+                new Comments {
+                    ID=9,
+                    Content="Quisque elementum nibh non pharetra accumsan.",
+                    CommentDate=new DateTime(2018,07,16),
+                    NewsFK=23,
+                    UserProfileFK=2
+                },
+                new Comments {
+                    ID=10,
+                    Content="Donec pharetra velit et quam scelerisque, at fermentum eros sagittis.",
+                    CommentDate=new DateTime(2018,07,14),
+                    NewsFK=22,
+                    UserProfileFK=3
+                },
+                new Comments {
+                    ID=11,
+                    Content="Quisque a libero a nisi fermentum molestie ut ac est.",
+                    CommentDate=new DateTime(2018,07,15),
+                    NewsFK=22,
+                    UserProfileFK=1
+                },
+                new Comments {
+                    ID=12,
+                    Content="Vestibulum ultrices erat sed interdum lobortis. In posuere velit dapibus tortor tempus fermentum.",
+                    CommentDate=new DateTime(2018,07,14),
+                    NewsFK=21,
+                    UserProfileFK=2
+                },
+                new Comments {
+                    ID=13,
+                    Content="Aenean interdum purus ac metus finibus, quis tempor diam placerat.",
+                    CommentDate=new DateTime(2018,07,15),
+                    NewsFK=20,
+                    UserProfileFK=2
+                },
+                new Comments {
+                    ID=14,
+                    Content="Praesent imperdiet nisl a urna rutrum ultrices.",
+                    CommentDate=new DateTime(2018,07,16),
+                    NewsFK=20,
+                    UserProfileFK=1
+                },
+                new Comments {
+                    ID=15,
+                    Content="Cras placerat leo vitae est viverra feugiat. Nam lobortis neque ut tortor placerat lacinia.",
+                    CommentDate=new DateTime(2018,07,15),
+                    NewsFK=19,
+                    UserProfileFK=2
+                },
+                new Comments {
+                    ID=16,
+                    Content="Vestibulum mattis risus quis neque mattis suscipit. Donec a augue bibendum, ultricies dui a, feugiat erat.",
+                    CommentDate=new DateTime(2018,07,14),
+                    NewsFK=19,
+                    UserProfileFK=3
+                },
+                new Comments {
+                    ID=17,
+                    Content="Fusce quis sapien nec ipsum blandit ultricies.",
+                    CommentDate=new DateTime(2018,07,13),
+                    NewsFK=18,
+                    UserProfileFK=1
+                },
+                new Comments {
+                    ID=18,
+                    Content="Aenean ut felis laoreet, volutpat urna vitae, congue elit.",
+                    CommentDate=new DateTime(2018,07,11),
+                    NewsFK=17,
+                    UserProfileFK=1
+                },
+                new Comments {
+                    ID=19,
+                    Content="Mauris luctus nisi ac iaculis finibus.",
+                    CommentDate=new DateTime(2018,07,12),
+                    NewsFK=16,
+                    UserProfileFK=2
+                },
+                new Comments {
+                    ID=20,
+                    Content="Aenean non dolor id diam tempus posuere a ut ipsum.",
+                    CommentDate=new DateTime(2018,07,2),
+                    NewsFK=16,
+                    UserProfileFK=3
+                },
+                new Comments {
+                    ID=21,
+                    Content="Suspendisse at velit molestie, convallis ligula cursus, tristique purus0. Nulla sit amet enim at enim suscipit tempor iaculis et elit.",
+                    CommentDate=new DateTime(2018,07,6),
+                    NewsFK=14,
+                    UserProfileFK=2
+                },
+                new Comments {
+                    ID=22,
+                    Content="Nulla sit amet enim at enim suscipit tempor iaculis et elit.",
+                    CommentDate=new DateTime(2018,07,4),
+                    NewsFK=12,
+                    UserProfileFK=3
+                },
+                new Comments {
+                    ID=23,
+                    Content="Suspendisse at velit molestie, convallis ligula cursus, tristique purus. Nulla vulputate nisl vehicula est pulvinar consequat.",
+                    CommentDate=new DateTime(2018,07,8),
+                    NewsFK=12,
+                    UserProfileFK=3
+                },
+                new Comments {
+                    ID=24,
+                    Content="Donec quis nisi et mauris vestibulum mollis eu et sapien.",
+                    CommentDate=new DateTime(2018,07,5),
+                    NewsFK=11,
+                    UserProfileFK=1
+                },
+                new Comments {
+                    ID=25,
+                    Content="Mauris id odio eu diam suscipit malesuada.",
+                    CommentDate=new DateTime(2018,07,6),
+                    NewsFK=11,
+                    UserProfileFK=2
+                },
+                new Comments {
+                    ID=26,
+                    Content="Morbi sed tortor luctus, bibendum orci sit amet, hendrerit orci.",
+                    CommentDate=new DateTime(2018,07,7),
+                    NewsFK=11,
+                    UserProfileFK=1
+                },
+                new Comments {
+                    ID=27,
+                    Content="Donec quis nisi et mauris vestibulum mollis eu et sapien.",
+                    CommentDate=new DateTime(2018,07,7),
+                    NewsFK=10,
+                    UserProfileFK=1
+                },
+                new Comments {
+                    ID=28,
+                    Content="Aenean a nibh lobortis, placerat neque at, vehicula eros.",
+                    CommentDate=new DateTime(2018,07,6),
+                    NewsFK=9,
+                    UserProfileFK=3
+                },
+                new Comments {
+                    ID=29,
+                    Content="Vivamus ac odio mollis, interdum dolor in, hendrerit dolor.",
+                    CommentDate=new DateTime(2018,07,5),
+                    NewsFK=6,
+                    UserProfileFK=2
+                },
+                new Comments {
+                    ID=30,
+                    Content="Aliquam sed dolor porttitor, malesuada massa vel, mollis sem.",
+                    CommentDate=new DateTime(2018,07,4),
+                    NewsFK=6,
+                    UserProfileFK=3
+                },
+                new Comments {
+                    ID=31,
+                    Content="Aliquam sed dolor porttitor, malesuada massa vel, mollis sem.",
+                    CommentDate=new DateTime(2018,07,3),
+                    NewsFK=5,
+                    UserProfileFK=3
+                },
+                new Comments {
+                    ID=32,
+                    Content="Vivamus ac odio mollis, interdum dolor in, hendrerit dolor.",
+                    CommentDate=new DateTime(2018,07,2),
+                    NewsFK=5,
+                    UserProfileFK=2
                 }
             };
             comments.ForEach(cc => context.Comments.AddOrUpdate(c => c.ID, cc));
@@ -438,6 +654,56 @@
                     ID=26,
                     Name="News26.jpg",
                     NewsFK=21
+                },
+                new Photos {
+                    ID=27,
+                    Name="News27.jpg",
+                    NewsFK=22
+                },
+                new Photos {
+                    ID=28,
+                    Name="News28.jpg",
+                    NewsFK=22
+                },
+                new Photos {
+                    ID=29,
+                    Name="News29.jpg",
+                    NewsFK=22
+                },
+                new Photos {
+                    ID=30,
+                    Name="News30.jpg",
+                    NewsFK=22
+                },
+                new Photos {
+                    ID=31,
+                    Name="News31.jpg",
+                    NewsFK=23
+                },
+                new Photos {
+                    ID=32,
+                    Name="News32.jpg",
+                    NewsFK=23
+                },
+                new Photos {
+                    ID=33,
+                    Name="News33.jpg",
+                    NewsFK=23
+                },
+                new Photos {
+                    ID=34,
+                    Name="News34.jpg",
+                    NewsFK=24
+                },
+                new Photos {
+                    ID=35,
+                    Name="News35.jpg",
+                    NewsFK=24
+                },
+                new Photos {
+                    ID=36,
+                    Name="News36.jpg",
+                    NewsFK=24
                 }
             };
             photos.ForEach(pp => context.Photos.AddOrUpdate(p => p.ID, pp));

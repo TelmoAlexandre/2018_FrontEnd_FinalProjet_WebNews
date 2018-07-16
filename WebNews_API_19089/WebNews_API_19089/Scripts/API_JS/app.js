@@ -8,7 +8,7 @@ let userProfile = document.createElement('div');
 document.addEventListener("DOMContentLoaded", function main(e) {
     init();
 
-    
+
 });
 
 function init() {
@@ -551,7 +551,7 @@ function displayNewsArticle(newsPiece) {
     // Traz todos os utilizadores
     getUsersProfile()
         .then(function (users) {
-            
+
             users.UserProfile.forEach(function (user) {
 
                 // Opções para cada userProfile
@@ -561,10 +561,9 @@ function displayNewsArticle(newsPiece) {
                 dropDownUserName.appendChild(userOption);
 
             });
-            
+
         })
-        .catch(function (error)
-        {
+        .catch(function (error) {
             console.error(error);
             alert("We couldn't retrieve the author's profile...");
         });
@@ -597,7 +596,7 @@ function displayNewsArticle(newsPiece) {
     commentsList.className = 'commentsList';
     commentsList.id = 'commentsList';
     newsCommentsContainer.appendChild(commentsList);
-    
+
     let h2 = document.createElement('h2');
     h2.textContent = 'Comments';
     commentsList.appendChild(h2);
@@ -626,14 +625,14 @@ function displayNewsArticle(newsPiece) {
         // Chama função que contém a promise com o POST
         postComment(jsonComment)
             .then(newComment => {
-                
+
                 // Criar um div e coloca-lo como primeiro nos cometários
                 // Para o novo comentário poder aparecer em cima
                 let divComment = document.createElement('div');
                 divComment.id = `newComment${newComment.ID}`
                 let commentsContainer = document.getElementById('commentsList');
                 commentsContainer.insertBefore(divComment, commentsContainer.childNodes[1]);
-                
+
                 return displaySingleComment(newComment, divComment.id);
             })
             .catch(erro => {
@@ -655,10 +654,6 @@ function displayNewsArticle(newsPiece) {
  */
 function displayComments(comments, divID) {
 
-    // Booleano que permite saber se os comments estao a ser escritos
-    // num newsArticle ou no perfil do utilizador
-    let newsArticle = (comments[0].UserID != null) ? true : false;
-
     comments.forEach(function (comment) {
 
         displaySingleComment(comment, divID)
@@ -668,6 +663,10 @@ function displayComments(comments, divID) {
 }
 
 function displaySingleComment(comment, divID) {
+
+    // Booleano que permite saber se os comments estao a ser escritos
+    // num newsArticle ou no perfil do utilizador
+    let newsArticle = (comment.UserID != null) ? true : false;
 
     // 'div' do comentário inteiro
     let commentContainer = document.createElement('div');
@@ -962,7 +961,7 @@ function createCarousel(photos, divID) {
         liIndicators.setAttribute('data-target', '#carouselExampleIndicators');
         liIndicators.setAttribute('data-slide-to', i);
         ulCarouselIndicatersList.appendChild(liIndicators);
-        
+
         let carouselItemContainer = document.createElement('div');
         carouselItemContainer.className = 'carousel-item';
         carouselInnerContainer.appendChild(carouselItemContainer);
@@ -979,7 +978,7 @@ function createCarousel(photos, divID) {
             liIndicators.className = 'active';
             carouselItemContainer.className = 'carousel-item active';
 
-        } 
+        }
 
         i++;
     });
@@ -1007,7 +1006,7 @@ function createCarousel(photos, divID) {
     aNext.className = 'carousel-control-next';
     aNext.href = '#carouselExampleIndicators';
     aNext.setAttribute('role', 'button');
-    aNext.setAttribute('data-slide','next');
+    aNext.setAttribute('data-slide', 'next');
     carouselContainer.appendChild(aNext);
 
     let spanNextIcon = document.createElement('span');
@@ -1019,7 +1018,7 @@ function createCarousel(photos, divID) {
     spanNext.className = 'sr-only';
     spanNext.textContent = 'Next';
     aNext.appendChild(spanNext);
-    
+
 }
 
 //#endregion
