@@ -236,6 +236,33 @@ function displayNews(news) {
         description.className = 'newsDescription';
         description.textContent = newsArticle.Description;
         newsBlock.appendChild(description);
+
+        // Contém a data e a categoria
+        let newsInfoContainer = document.createElement('div');
+        newsInfoContainer.className = 'newsInfo';
+        newsBlock.appendChild(newsInfoContainer);
+
+        // Paragrafo com a data
+        let pDate = document.createElement('p');
+        pDate.className = 'bold';
+        pDate.textContent = newsArticle.Date;
+        newsInfoContainer.appendChild(pDate);
+
+        // Paragrafo que vai conter o link com a categoria
+        let pCategoryContainer = document.createElement('p');
+        pCategoryContainer.className = 'bold';
+        newsInfoContainer.appendChild(pCategoryContainer);
+
+        // Link da categoria
+        let categoryLink = document.createElement('a');
+        categoryLink.textContent = `> ${newsArticle.Category} <`;
+        categoryLink.onclick = function (e) {
+            e.preventDefault();
+
+            showAllNews(newsArticle.Category, 1);
+        }
+        pCategoryContainer.appendChild(categoryLink);
+
     });
 
     // Caso não existam noticias, mostra uma mensagem
@@ -273,7 +300,7 @@ function displayNews(news) {
 
         let previousPageLink = document.createElement('a');
         previousPageLink.textContent = '< Previous Page';
-        previousPageLink.onsubmit = function (e) {
+        previousPageLink.onclick = function (e) {
             e.preventDefault();
 
             showAllNews(news.Category, news.PageNum - 1);

@@ -248,6 +248,15 @@
                     NewsDate= new DateTime(2018,06,06,23,34,0),
                     CategoryFK=3,
                     UsersProfileList = new List<UsersProfile> { user[0]}
+                },
+                new News {
+                    ID=21,
+                    Title="Boeing 'concerns' over US-China trade row",
+                    Description="The head of US aerospace and defence giant Boeing has warned about potential damage of the growing US-China trade row.",
+                    Content="\"Aerospace thrives on free and open trade,\" said chief executive Dennis Muilenburg. He said he was concerned tariffs could push up costs for aircraft manufacturers. \"The aerospace sector drives economic benefits globally,\" he added.With both the US and China imposing tariffs on each other's goods, Mr Muilenburg said Boeing wanted to find \"alternative solutions\" to trade disputes. <br/><br/>\"We are concerned it could affect supply chain costs - but those supply chains are flowing in both directions [between China and the US], it is an intricate network around the world.\" Speaking to reporters ahead of this week's Farnborough Airshow, Mr Muilenburg insisted that the White House was listening to his firm's arguments. \"We engaged very much with both governments [in China and the US,\" he said, \"our voice is being heard.\" He was hopeful that there would be a \"good resolution\" to the disputes, adding \"our job is to maintain a long-term perspective\".",
+                    NewsDate= new DateTime(2018,06,15,12,34,0),
+                    CategoryFK=1,
+                    UsersProfileList = new List<UsersProfile> { user[2], user[1]}
                 }
             };
             news.ForEach(aa => context.News.AddOrUpdate(a => a.Title, aa));
@@ -419,6 +428,16 @@
                     ID=24,
                     Name="News24.jpg",
                     NewsFK=20
+                },
+                new Photos {
+                    ID=25,
+                    Name="News25.jpg",
+                    NewsFK=21
+                },
+                new Photos {
+                    ID=26,
+                    Name="News26.jpg",
+                    NewsFK=21
                 }
             };
             photos.ForEach(pp => context.Photos.AddOrUpdate(p => p.ID, pp));

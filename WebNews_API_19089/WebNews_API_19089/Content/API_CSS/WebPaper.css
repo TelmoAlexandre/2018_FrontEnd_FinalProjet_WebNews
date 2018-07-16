@@ -105,6 +105,14 @@ a:hover {
   transition: 0.5s;
 }
 
+.newsBlock .newsInfo p {
+  margin: 0;
+}
+
+.newsBlock .newsInfo a:hover {
+  text-decoration: underline;
+}
+
 .newsBlock .newsOptions {
   font-size: 1.5em;
   font-weight: bold;
@@ -124,8 +132,8 @@ a:hover {
 }
 
 .searchInput .search-box {
-  height: 60px;
-  width: 300px;
+  height: 3.5rem;
+  width: 20rem;
   border-radius: 30px;
   border: none;
   outline: none;
@@ -162,6 +170,10 @@ a:hover {
   padding-left: 1rem;
   -webkit-transition: .5s;
   transition: .5s;
+}
+
+.newsCategory {
+  padding: 2rem 0 0;
 }
 
 .newsDetail {
@@ -474,7 +486,7 @@ img {
   }
 }
 
-@media only screen and (min-width: 300px) and (max-width: 767px) {
+@media only screen and (max-width: 767px) {
   .container {
     max-width: 700px;
   }
@@ -483,6 +495,9 @@ img {
     -webkit-box-flex: 0;
             flex: 0 0 100%;
     max-width: 100%;
+  }
+  .search-box {
+    width: 50% !important;
   }
 }
 /*# sourceMappingURL=WebPaper.css.map */

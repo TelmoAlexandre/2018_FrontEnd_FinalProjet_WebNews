@@ -56,7 +56,9 @@ namespace WebNews_API_19089.Controllers
                 {
                     ID = n.ID,
                     Title = n.Title,
-                    Description = n.Description
+                    Description = n.Description,
+                    Date = n.NewsDate.ToString("MM-dd-yyyy"),
+                    Category = n.Category.Name
                 }).ToList();
                 
                 // Descobre a primeira e ultima noticia da categoria
@@ -72,7 +74,10 @@ namespace WebNews_API_19089.Controllers
                 {
                     ID = n.ID,
                     Title = n.Title,
-                    Description = n.Description
+                    Description = n.Description,
+                    Date = n.NewsDate.ToString("MM-dd-yyyy"),
+                    Category = n.Category.Name
+
                 }).ToList();
 
                 // Descobre a primeira e ultima noticia de TODAS
