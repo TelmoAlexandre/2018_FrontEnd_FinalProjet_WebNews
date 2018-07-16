@@ -192,7 +192,7 @@ namespace WebNews_API_19089.Controllers
                                     Title = n.Title,
                                     Description = n.Description,
                                     Date = n.NewsDate.ToString("MM-dd-yyyy"),
-                                    Category = categoryName
+                                    Category = n.Category.Name
 
                                 }).ToList();
             }
@@ -207,7 +207,7 @@ namespace WebNews_API_19089.Controllers
                                    Title = n.Title,
                                    Description = n.Description,
                                    Date = n.NewsDate.ToString("MM-dd-yyyy"),
-                                   Category = categoryName
+                                   Category = n.Category.Name
 
                                }).ToList();
             }
