@@ -657,8 +657,6 @@ function displayNewsArticle(newsPiece) {
 
 }
 
-
-
 /**
  * 
  * Recebe a lista de comments e o div pai onde os deve colocar
@@ -680,11 +678,12 @@ function displaySingleComment(comment, divID) {
 
     // Booleano que permite saber se os comments estao a ser escritos
     // num newsArticle ou no perfil do utilizador
-    let newsArticle = (comment.UserID != null) ? true : false;
+    let newsArticle = (comment.UserID != 0) ? true : false;
 
     // 'div' do comentário inteiro
     let commentContainer = document.createElement('div');
     commentContainer.className = 'comment';
+    commentContainer.id = `commentContainer${comment.ID}`;
     $(`#${divID}`).append(commentContainer);
 
     // Contem o link do nome do utilizador e a data
@@ -729,29 +728,53 @@ function displaySingleComment(comment, divID) {
     commentBodyContainer.textContent = comment.Content;
     commentContainer.appendChild(commentBodyContainer);
 
+    let commentOptionsContainer = document.createElement('div');
+    commentOptionsContainer.className = 'commentOptionsContainer';
+    commentContainer.appendChild(commentOptionsContainer);
+
     // Caso os comments estejam a ser escritos no perfil do utilizador
     // criar um link para a noticia onde o comentario se encontra
     if (!newsArticle) {
 
-        // div que ira conter o link para a noticia do comentario
-        let newsContextContainer = document.createElement('div');
-        newsContextContainer.className = 'newsContext';
-        commentContainer.appendChild(newsContextContainer);
-
         // Link para a noticia
         let newsLink = document.createElement('a');
         newsLink.className = 'bold';
-        newsLink.textContent = 'News Context';
+        newsLink.textContent = 'News Context || ';
         newsLink.onclick = function (e) {
             e.preventDefault();
 
             showNewsArticle(comment.NewsID);
         };
-        newsContextContainer.appendChild(newsLink);
+        commentOptionsContainer.appendChild(newsLink);
 
     }
+
+    // Opção para apagar o comentário
+    let deleteOption = document.createElement('a');
+    deleteOption.className = 'bold';
+    deleteOption.textContent = 'Delete';
+    deleteOption.onclick = function (e) {
+        e.preventDefault();
+
+        deleteThisComment(comment.ID);
+    }
+    commentOptionsContainer.appendChild(deleteOption);
+
 }
 
+function deleteThisComment(id) {
+
+    deleteComment(id)
+        .then(function (comment) {
+
+            $(`#commentContainer${comment.ID}`).remove();
+
+        }).catch(function (error) {
+
+            console.error(error);
+
+        });
+}
 
 function showUserProfile(id) {
 

@@ -10,6 +10,7 @@ namespace WebNews_API_19089.Models.ViewModels
         public int ID { get; set; }
         public string User { get; set; }
         public string Date { get; set; }
+        public int NewsID { get; set; }
         public int UserID { get; set; }
         public string Content { get; set; }
     }

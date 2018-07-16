@@ -108,3 +108,24 @@ function postComment(jsonComment) {
             }
         })
 }
+
+function deleteComment(id) {
+
+    return fetch(`/api/Comments/Delete/${id}`, {
+
+        method: 'delete',
+        headers: { 'Content-Type': 'application/json' }
+
+    })
+        .then(resposta => {
+            if (resposta.ok) {
+
+                return resposta.json();
+
+            } else {
+
+                return resposta.json()
+                    .then(erro => Promise.reject(erro));
+            }
+        })
+}

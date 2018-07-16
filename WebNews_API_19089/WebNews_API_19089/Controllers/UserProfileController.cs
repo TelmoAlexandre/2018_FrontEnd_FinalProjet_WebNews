@@ -50,11 +50,12 @@ namespace WebNews_API_19089.Controllers
             }
 
             // Recolher os comentários
-            var comments = user.CommentsList.Select(c => new {
+            var comments = user.CommentsList.Select(c => new GetCommentViewModel{
+                ID = c.ID,
                 User = c.UserProfile.Name,
                 Date = c.CommentDate.ToString("MM-dd-yyyy"),
                 NewsID = c.News.ID,
-                c.Content
+                Content = c.Content
             }).ToList();
 
             // Recolher as noticias

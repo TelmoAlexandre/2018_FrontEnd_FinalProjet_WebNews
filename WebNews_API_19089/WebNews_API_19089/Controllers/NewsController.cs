@@ -106,7 +106,7 @@ namespace WebNews_API_19089.Controllers
 
         #endregion
 
-        #region SingleNews
+        #region News Article
 
         [HttpGet, Route("{id}")]
         public IHttpActionResult GetNewsArticle(int id)
@@ -131,8 +131,9 @@ namespace WebNews_API_19089.Controllers
             {
                 ID = c.ID,
                 User = c.UserProfile.Name,
-                Date = c.CommentDate.ToString("MM-dd-yyyy"),
                 UserID = c.UserProfile.ID,
+                Date = c.CommentDate.ToString("MM-dd-yyyy"),
+                NewsID = c.NewsFK,
                 Content = c.Content
             }).ToList();
 

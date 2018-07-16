@@ -325,6 +325,15 @@ a:hover {
   border-top: none;
 }
 
+.newsCommentsContainer .commentOptionsContainer {
+  text-align: right;
+  font-size: 1.2em;
+}
+
+.newsCommentsContainer .commentOptionsContainer a:hover {
+  text-decoration: underline;
+}
+
 .newsCommentsContainer .comment {
   padding: 2rem .5rem 2rem;
   border-top: .06rem solid;
@@ -410,12 +419,12 @@ a:hover {
   margin-top: 1rem;
 }
 
-.userProfile .commentsListUserProfile .newsContext {
+.userProfile .commentsListUserProfile .commentOptionsContainer {
   text-align: right;
   font-size: 1.2em;
 }
 
-.userProfile .commentsListUserProfile .newsContext a:hover {
+.userProfile .commentsListUserProfile .commentOptionsContainer a:hover {
   text-decoration: underline;
 }
 

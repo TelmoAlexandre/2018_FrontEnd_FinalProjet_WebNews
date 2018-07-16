@@ -75,6 +75,30 @@ namespace WebNews_API_19089.Controllers
 
         #endregion
 
+        #region Delete
+
+        [HttpDelete, Route("Delete/{id}")]
+        public IHttpActionResult DeleteComment(int id)
+        {
+            var comment = db.Comments.Find(id);
+
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            db.Comments.Remove(comment);
+            db.SaveChanges();
+            
+            return Ok(new GetCommentViewModel {
+                ID = comment.ID,
+                Date = comment.CommentDate.ToString("MM-dd-yyyy"),
+                Content = comment.Content
+            });
+        }
+
+        #endregion
+
         #region Dispose
 
         protected override void Dispose(bool disposing)
