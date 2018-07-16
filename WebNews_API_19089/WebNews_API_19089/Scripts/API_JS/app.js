@@ -1,16 +1,17 @@
-﻿
-// Declaração dos 'div' que vão ter que ser escondidos/mostrados
+﻿// Declaração dos 'div' que vão ter que ser escondidos/mostrados
 let newsContainer = document.createElement('div');
 let newsArticle = document.createElement('div');
 let userProfile = document.createElement('div');
 
 
 document.addEventListener("DOMContentLoaded", function main(e) {
+
     init();
-
-
 });
 
+/**
+ * Chama as funções necessárias para inciar a página
+ * */
 function init() {
 
     // Cria os 'div' base
@@ -32,6 +33,11 @@ function init() {
 
 }
 
+//#region Main Containers
+
+/**
+ * Cria os Containers do layout principal da pagina
+ * */
 function CreateMainContainers() {
 
     // Header
@@ -59,6 +65,13 @@ function CreateMainContainers() {
     document.body.appendChild(footer);
 }
 
+//#endregion
+
+//#region Fill Page
+
+/**
+ * Preenche o topo da página. Com titulo, data e categorias.
+ * */
 function fillHeaderContainer() {
 
     //#region headerLinks
@@ -111,6 +124,43 @@ function fillHeaderContainer() {
 }
 
 /**
+ * Completa os divs que iram ter as informações da API
+ * */
+function fillBodyContainer() {
+
+    // 'div' que irá conter todos os news blocks
+    newsContainer.className = 'row newsContainer'; // Bootstrap
+    $('.container').append(newsContainer);
+
+    // 'div' que irá conter os detalhes de uma noticia
+    newsArticle.className = 'col-12 row newsArticle'; // Bootstrap
+    $('.container').append(newsArticle);
+
+    // 'div' que irá conter todos os news blocks
+    userProfile.className = 'col-12 row userProfile'; // Bootstrap
+    $('.container').append(userProfile);
+
+}
+
+/**
+ * Completa o footer da página
+ * */
+function fillFooterContainer() {
+
+    let footer = document.createElement('footer');
+    $('.footer').append(footer);
+
+    let pFooter = document.createElement('p');
+    pFooter.textContent = `© ${moment().format('YYYY')} - Web Paper - Telmo Alexandre, 19089`;
+    footer.appendChild(pFooter);
+
+}
+
+//#endregion
+
+//#region Categories
+
+/**
  * 
  * Recebe Json com categorias e faz o seu display na top bar.
  * 
@@ -148,33 +198,16 @@ function displayCategories(categories) {
 
 }
 
-function fillBodyContainer() {
+//#endregion
 
-    // 'div' que irá conter todos os news blocks
-    newsContainer.className = 'row newsContainer'; // Bootstrap
-    $('.container').append(newsContainer);
+//#region News
 
-    // 'div' que irá conter os detalhes de uma noticia
-    newsArticle.className = 'col-12 row newsArticle'; // Bootstrap
-    $('.container').append(newsArticle);
-
-    // 'div' que irá conter todos os news blocks
-    userProfile.className = 'col-12 row userProfile'; // Bootstrap
-    $('.container').append(userProfile);
-
-}
-
-function fillFooterContainer() {
-
-    let footer = document.createElement('footer');
-    $('.footer').append(footer);
-
-    let pFooter = document.createElement('p');
-    pFooter.textContent = `© ${moment().format('YYYY')} - Web Paper - Telmo Alexandre, 19089`;
-    footer.appendChild(pFooter);
-
-}
-
+/**
+ * Chama o fetch das noticias
+ * 
+ * @param {any} categoryName Nome da categoria, para trazer as noticias dessa categoria
+ * @param {any} pageNum Para saber o numero da pagina pedido (por defeito: 1)
+ */
 function showAllNews(categoryName, pageNum) {
 
     getNews(categoryName, pageNum)
@@ -191,6 +224,12 @@ function showAllNews(categoryName, pageNum) {
         })
 }
 
+/**
+ * 
+ * Monta o layout da página inicial com noticias.
+ * 
+ * @param {any} news Recebe o JSon com as 6 noticias de cada página.
+ */
 function displayNews(news) {
 
     initThisDivToShowContent(newsContainer.className);
@@ -339,6 +378,17 @@ function displayNews(news) {
     }
 }
 
+//#endregion
+
+//#region Search
+
+/**
+ * 
+ * Chama o fetch que filtra as noticias.
+ * 
+ * @param {any} categoryName Nome da categoria para especificar a pesquisa
+ * @param {any} searchValue Valor de texto que o utilizador pretende procurar
+ */
 function processSearch(categoryName, searchValue) {
 
     getNewsSearchFilter(categoryName, searchValue)
@@ -355,6 +405,16 @@ function processSearch(categoryName, searchValue) {
 
 }
 
+//#endregion
+
+//#region News Article
+
+/**
+ * 
+ * Chama o fetch de para os detalhes de uma noticia.
+ * 
+ * @param {any} id ID que especifica a noticia em questão
+ */
 function showNewsArticle(id) {
 
     getNewsArticle(id)
@@ -371,6 +431,12 @@ function showNewsArticle(id) {
 
 }
 
+/**
+ * 
+ * Monta o layout dos detalhes de uma noticia.
+ * 
+ * @param {any} newsPiece Recebe o JSon dos detalhes da noticia.
+ */
 function displayNewsArticle(newsPiece) {
 
     initThisDivToShowContent(newsArticle.className);
@@ -657,12 +723,16 @@ function displayNewsArticle(newsPiece) {
 
 }
 
+//#endregion
+
+//#region Comments
+
 /**
  * 
  * Recebe a lista de comments e o div pai onde os deve colocar
  * 
- * @param {any} comments
- * @param {any} divID
+ * @param {any} comments JSon dos comentários
+ * @param {any} divID ID do div onde os comentários serão colocados.
  */
 function displayComments(comments, divID) {
 
@@ -674,6 +744,13 @@ function displayComments(comments, divID) {
 
 }
 
+/**
+ * 
+ * Monta o layout de cada comentário.
+ * 
+ * @param {any} comment JSon do comentário.
+ * @param {any} divID ID do div onde o comentário será posto.
+ */
 function displaySingleComment(comment, divID) {
 
     // Booleano que permite saber se os comments estao a ser escritos
@@ -761,6 +838,12 @@ function displaySingleComment(comment, divID) {
 
 }
 
+/**
+ * 
+ * Chama o fetch Delete para apagar um comentário
+ * 
+ * @param {any} id ID do comentário a ser apagado.
+ */
 function deleteThisComment(id) {
 
     deleteComment(id)
@@ -775,6 +858,16 @@ function deleteThisComment(id) {
         });
 }
 
+//#endregion
+
+//#region UserProfile
+
+/**
+ * 
+ * Chama o fetch que traz o JSon de um profile de um jornalista.
+ * 
+ * @param {any} id
+ */
 function showUserProfile(id) {
 
     getUserProfile(id)
@@ -790,6 +883,12 @@ function showUserProfile(id) {
         })
 }
 
+/**
+ * 
+ * Monta o layout do profile do jornalista.
+ * 
+ * @param {any} user JSon com os detalhes do jornalista.
+ */
 function displayUserProfile(user) {
 
     initThisDivToShowContent(userProfile.className);
@@ -888,6 +987,8 @@ function displayUserProfile(user) {
     displayComments(user.Comments, commentsContainer.id);
 
 }
+
+//#endregion
 
 //#region Utils
 
