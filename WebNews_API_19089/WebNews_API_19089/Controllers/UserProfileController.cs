@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using WebNews_API_19089.Models;
 using System.Data.Entity;
+using WebNews_API_19089.Models.ViewModels;
 
 namespace WebNews_API_19089.Controllers
 {
@@ -24,12 +25,11 @@ namespace WebNews_API_19089.Controllers
 
         public IHttpActionResult GetUserProfile()
         {
-
             // Recolher os utilizadores
-            var users = db.UsersProfile.Select(u => new
+            var users = db.UsersProfile.Select(u => new UserProfileViewModel
             {
-                u.ID,
-                u.Name
+                ID = u.ID,
+                Name = u.Name
             }).ToList();
 
             return Ok(new
@@ -76,6 +76,8 @@ namespace WebNews_API_19089.Controllers
 
         #endregion
 
+        #region Dispose
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -84,5 +86,7 @@ namespace WebNews_API_19089.Controllers
             }
             base.Dispose(disposing);
         }
+
+        #endregion
     }
 }

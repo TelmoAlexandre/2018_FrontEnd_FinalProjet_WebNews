@@ -24,6 +24,9 @@ function init() {
     // Com os 'div' que irão ser collapsed
     fillBodyContainer();
 
+    // Preenche o footer
+    fillFooterContainer();
+
     // Preenche o corpo com o default de noticias
     showAllNews("All", 1);
 
@@ -158,6 +161,17 @@ function fillBodyContainer() {
     // 'div' que irá conter todos os news blocks
     userProfile.className = 'col-12 row userProfile'; // Bootstrap
     $('.container').append(userProfile);
+
+}
+
+function fillFooterContainer() {
+
+    let footer = document.createElement('footer');
+    $('.footer').append(footer);
+
+    let pFooter = document.createElement('p');
+    pFooter.textContent = `© ${moment().format('YYYY')} - Web Paper - Telmo Alexandre, 19089`;
+    footer.appendChild(pFooter);
 
 }
 

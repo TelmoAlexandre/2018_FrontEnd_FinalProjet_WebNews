@@ -22,7 +22,7 @@ namespace WebNews_API_19089.Controllers
 
         #region NewsList
 
-
+        [ResponseType(typeof(GetNewsViewModel))]
         [HttpGet, Route("Category/{categoryName}/Page/{pageNum}")]
         public IHttpActionResult GetNewsPage(string categoryName, int pageNum)
         {
@@ -60,7 +60,7 @@ namespace WebNews_API_19089.Controllers
                     Date = n.NewsDate.ToString("MM-dd-yyyy"),
                     Category = n.Category.Name
                 }).ToList();
-                
+
                 // Descobre a primeira e ultima noticia da categoria
                 lastNewsQuery = db.News.Where(n => n.Category.Name == categoryName).OrderBy(n => n.NewsDate).First();
                 firstNewsQuery = db.News.Where(n => n.Category.Name == categoryName).OrderByDescending(n => n.NewsDate).First();
@@ -94,9 +94,7 @@ namespace WebNews_API_19089.Controllers
             bool firstPage = (newsOutput.Where(n => n.ID == firstNewsQuery.ID).Count() > 0) ? true : false;
 
 
-
-            // Resposta --------------------------------------------------------------------------------------------------------------
-            return Ok(new NewsOutputViewModel
+            return Ok(new GetNewsViewModel
             {
                 News = newsOutput,
                 Category = categoryName,
@@ -105,34 +103,6 @@ namespace WebNews_API_19089.Controllers
                 FirstPage = firstPage
             });
         }
-
-        [HttpGet, Route("Category/{categoryID}")]
-        public IHttpActionResult GetNews(int categoryID)
-        {
-
-            // Tenta encontrar a categoria
-            var category = db.Categories.Find(categoryID);
-
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            // Encontrar as noticias dessa categoria
-            var news = db.News.Where(n => n.CategoryFK == categoryID).Select(n => new
-            {
-                n.ID,
-                n.Title,
-                n.Description
-            }).ToList();
-
-            return Ok(new
-            {
-                News = news,
-                Category = category.Name
-            });
-        }
-
 
         #endregion
 
@@ -150,24 +120,27 @@ namespace WebNews_API_19089.Controllers
             }
 
             // Recolher os autores da notícia
-            var users = newsArticle.UsersProfileList.Select(u => new
+            var users = newsArticle.UsersProfileList.Select(u => new UserProfileViewModel
             {
-                u.ID,
-                u.Name
+                ID = u.ID,
+                Name = u.Name
             }).ToList();
 
             // Recolher os comentários da notícia
-            var comments = newsArticle.CommentsList.OrderByDescending(c => c.CommentDate).Select(c => new
+            var comments = newsArticle.CommentsList.OrderByDescending(c => c.CommentDate).Select(c => new GetCommentViewModel
             {
+                ID = c.ID,
                 User = c.UserProfile.Name,
                 Date = c.CommentDate.ToString("MM-dd-yyyy"),
                 UserID = c.UserProfile.ID,
-                c.Content
+                Content = c.Content
             }).ToList();
 
             // Recolher as fotos
-            var photos = newsArticle.PhotosList.Select(p => new {
-                p.Name
+            var photos = newsArticle.PhotosList.Select(p => new PhotoViewModel
+            {
+                ID = p.ID,
+                Name = p.Name
             }).ToList();
 
             // Trocar os breaks para astriscos para ser apenas um caracter
@@ -175,17 +148,16 @@ namespace WebNews_API_19089.Controllers
 
             // Separar o conteudo pelos astrisos e colocar num array
             // Isto vai deixar alguns elementos do array vazio
-            // O que é bom, porque num forEach, coloco cada um num <p>
+            // O que é bom, porque num forEach, coloca num <p> vazio
             // e assim faz verdadeiros paragrafos com um espaço entre eles
             string[] content = allContent.Split(new char[] { '#' });
 
 
-
-            return Ok(new
+            return Ok(new GetNewsArticleViewModel
             {
-                newsArticle.ID,
-                newsArticle.Title,
-                newsArticle.Description,
+                ID = newsArticle.ID,
+                Title = newsArticle.Title,
+                Description = newsArticle.Description,
                 Content = content,
                 Date = newsArticle.NewsDate.ToString("MM-dd-yyyy"),
                 Time = newsArticle.NewsDate.ToString("hh:mm:ss tt"),
@@ -193,8 +165,7 @@ namespace WebNews_API_19089.Controllers
                 Photos = photos,
                 Authors = users,
                 Comments = comments
-            }
-            );
+            });
 
         }
         #endregion
@@ -210,34 +181,38 @@ namespace WebNews_API_19089.Controllers
             // Verficar a categoria
             if (categoryName != "All")
             {
-
+                // Pesquisar dentro da categoria
                 newsOutput = db.News.Where(n => n.Category.Name == categoryName)
                                 .Where(n => n.Title.Contains(searchValue))
-                                .OrderByDescending(n => n.NewsDate)
-                                .Select(n => new NewsBlockViewModel {
-
+                                .OrderByDescending(n => n.NewsDate).ToList()
+                                .Select(n => new NewsBlockViewModel
+                                {
                                     ID = n.ID,
                                     Title = n.Title,
-                                    Description = n.Description
+                                    Description = n.Description,
+                                    Date = n.NewsDate.ToString("MM-dd-yyyy"),
+                                    Category = categoryName
 
-                            }).ToList();
-
+                                }).ToList();
             }
             else
             {
+                // Pesquisar em todas as noticias
                 newsOutput = db.News.Where(n => n.Title.Contains(searchValue))
-                               .OrderByDescending(n => n.NewsDate)
+                               .OrderByDescending(n => n.NewsDate).ToList()
                                .Select(n => new NewsBlockViewModel
                                {
-
                                    ID = n.ID,
                                    Title = n.Title,
-                                   Description = n.Description
+                                   Description = n.Description,
+                                   Date = n.NewsDate.ToString("MM-dd-yyyy"),
+                                   Category = categoryName
 
                                }).ToList();
             }
 
-            return Ok(new NewsOutputViewModel {
+            return Ok(new GetNewsViewModel
+            {
                 News = newsOutput,
                 Category = categoryName,
                 PageNum = 1,
@@ -250,6 +225,8 @@ namespace WebNews_API_19089.Controllers
 
         #endregion
 
+        #region Dispose
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -258,5 +235,7 @@ namespace WebNews_API_19089.Controllers
             }
             base.Dispose(disposing);
         }
+
+        #endregion
     }
 }

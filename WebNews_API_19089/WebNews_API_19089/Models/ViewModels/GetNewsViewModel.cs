@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebNews_API_19089.Models.ViewModels
 {
-    public class NewsOutputViewModel
+    public class GetNewsViewModel
     {
         public ICollection<NewsBlockViewModel> News { get; set; }
         public string Category { get; set; }

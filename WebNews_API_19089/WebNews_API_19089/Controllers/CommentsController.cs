@@ -21,12 +21,12 @@ namespace WebNews_API_19089.Controllers
 
         #endregion
 
-
         #region POST Comment
 
+        [HttpPost]
+        [ResponseType(typeof(GetCommentViewModel))]
         public IHttpActionResult PostComment(PostCommentViewModel model)
         {
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -58,7 +58,7 @@ namespace WebNews_API_19089.Controllers
             // Recolhe o comment que foi gravado
             comment = db.Comments.OrderByDescending(c => c.CommentDate).First();
 
-            // Porque ainda o utilizador ainda não está associado no Comment.UserProfile
+            // Porque ainda o utilizador ainda não está associado no comment.UserProfile
             UsersProfile user = db.UsersProfile.Find(model.UserProfileID);
 
             GetCommentViewModel response = new GetCommentViewModel
@@ -75,6 +75,8 @@ namespace WebNews_API_19089.Controllers
 
         #endregion
 
+        #region Dispose
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -84,5 +86,6 @@ namespace WebNews_API_19089.Controllers
             base.Dispose(disposing);
         }
 
+        #endregion
     }
 }
