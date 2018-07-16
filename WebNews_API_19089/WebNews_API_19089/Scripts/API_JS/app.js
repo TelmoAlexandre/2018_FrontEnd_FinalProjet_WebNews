@@ -682,8 +682,7 @@ function displaySingleComment(comment, divID) {
 
     // 'div' do comentário inteiro
     let commentContainer = document.createElement('div');
-    commentContainer.className = 'comment';
-    commentContainer.id = `commentContainer${comment.ID}`;
+    commentContainer.className = `comment commentContainer${comment.ID}`;
     $(`#${divID}`).append(commentContainer);
 
     // Contem o link do nome do utilizador e a data
@@ -767,7 +766,7 @@ function deleteThisComment(id) {
     deleteComment(id)
         .then(function (comment) {
 
-            $(`#commentContainer${comment.ID}`).remove();
+            $(`.commentContainer${comment.ID}`).remove();
 
         }).catch(function (error) {
 
